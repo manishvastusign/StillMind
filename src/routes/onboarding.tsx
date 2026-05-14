@@ -51,21 +51,39 @@ function Onboarding() {
   }, [step, answers, done]);
 
   if (done) {
+    const recs = [
+      { title: "Sleep Stories", sub: "Drift off to gentle voices and slow soundscapes.", grad: "linear-gradient(135deg, #1B2B34, #3B82F6)" },
+      { title: "Guided Breathwork", sub: "Five-minute resets for stress and anxious moments.", grad: "linear-gradient(135deg, #2F7D6A, #4F7CFF)" },
+      { title: "Daily Mindfulness", sub: "A calming pause woven into your everyday rhythm.", grad: "linear-gradient(135deg, #2F6B52, #7FA38D)" },
+    ];
     return (
       <div className="min-h-screen bg-[var(--background)] flex flex-col">
         <TopBar progress={100} onBack={() => setDone(false)} />
         <div className="flex-1 flex items-center">
-          <div className="max-w-[760px] w-full mx-auto px-6 py-20 text-center">
-            <div className="w-32 h-32 mx-auto rounded-full mb-10 animate-[breathe_6s_ease-in-out_infinite]" style={{ background: "var(--gradient-primary)", boxShadow: "0 30px 80px rgba(59,130,246,0.3)" }} />
-            <h1 className="text-[36px] md:text-[48px] font-semibold leading-[1.18] tracking-tight" style={{ color: "#2C2C2C" }}>
+          <div className="max-w-[820px] w-full mx-auto px-6 py-16 text-center animate-step-in">
+            <div className="w-28 h-28 mx-auto rounded-full mb-8 animate-[breathe_6s_ease-in-out_infinite]" style={{ background: "var(--gradient-primary)", boxShadow: "0 30px 80px rgba(59,130,246,0.3), 0 0 0 10px rgba(127,163,141,0.08)" }} />
+            <h1 className="text-[30px] md:text-[40px] font-semibold leading-[1.18] tracking-tight" style={{ color: "#2C2C2C" }}>
               Your gentle path is ready.
             </h1>
-            <p className="text-paragraph mt-6 max-w-xl mx-auto">
-              Based on what you shared, we've shaped a personalised wellness journey — sleep stories, breathwork, and mindfulness sessions tuned to you.
+            <p className="mt-5 max-w-lg mx-auto text-[16px] md:text-[17px] leading-[1.7] text-[#5B5B5B]">
+              Based on what you shared, we've shaped a personalised wellness journey just for you.
             </p>
-            <button onClick={() => navigate({ to: "/signin" })} className="btn-cta mt-12">Continue to your plan</button>
-            <div className="mt-6">
-              <button onClick={() => navigate({ to: "/" })} className="text-[#4B4B4B] text-sm hover:text-[var(--deep-green)] transition-colors">Maybe later</button>
+
+            <div className="mt-10 grid sm:grid-cols-3 gap-4 text-left">
+              {recs.map((r, i) => (
+                <div key={r.title} className="card-hover rounded-[22px] p-6 text-white relative overflow-hidden" style={{ background: r.grad, animation: `step-in 0.6s cubic-bezier(0.22,1,0.36,1) ${0.1 + i * 0.1}s both` }}>
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0) 60%)" }} />
+                  <div className="relative">
+                    <div className="text-[15px] font-semibold mb-1.5">{r.title}</div>
+                    <p className="text-[13px] leading-[1.55] text-white/80">{r.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button onClick={() => navigate({ to: "/signin" })} className="btn-cta btn-cta-glow mt-12">Begin your journey</button>
+            <div className="mt-5">
+              <button onClick={() => navigate({ to: "/" })} className="text-[#6B7280] text-[14px] hover:text-[var(--deep-green)] transition-colors underline-offset-4 hover:underline">Maybe later</button>
             </div>
           </div>
         </div>
