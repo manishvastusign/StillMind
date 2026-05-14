@@ -22,8 +22,8 @@ function SignIn() {
           </Link>
         </div>
         <div className="bg-white rounded-[32px] p-12 shadow-[0_10px_40px_rgba(0,0,0,0.06)]">
-          <h1 className="text-[36px] md:text-[44px] font-bold leading-tight" style={{ color: "#2C2C2C" }}>Welcome back.</h1>
-          <p className="mt-3 text-[18px] text-[#5B5B5B]">Continue your wellness journey.</p>
+          <h1 className="text-[30px] md:text-[36px] font-semibold leading-[1.2] tracking-tight" style={{ color: "#2C2C2C" }}>Welcome back.</h1>
+          <p className="mt-3 text-[16px] text-[#5B5B5B]">Continue your wellness journey.</p>
 
           <form className="mt-10 space-y-5" onSubmit={(e) => e.preventDefault()}>
             <div>
