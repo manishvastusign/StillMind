@@ -86,6 +86,10 @@
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
+@keyframes step-in {
+  0% { opacity: 0; transform: translateY(14px); filter: blur(2px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
 @keyframes breathe {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.18); }
@@ -98,6 +102,12 @@
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(127, 163, 141, 0.35), 0 0 0 5px rgba(59, 130, 246, 0.18);
+    border-radius: 14px;
+    transition: box-shadow 0.2s ease;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
