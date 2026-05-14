@@ -36,20 +36,20 @@ function MindPage() {
     <div className="min-h-screen bg-[var(--background)]" style={{ ["--deep-green" as never]: "#2F6B52" }}>
       <Navbar accent="#2F6B52" />
 
-      <section className="pt-[120px] pb-32" style={{ background: "linear-gradient(180deg, var(--background) 0%, #ECEDE7 100%)" }}>
-        <div className="container-wellness grid lg:grid-cols-2 gap-20 items-center">
+      <section className="pt-[140px] pb-32 md:pb-40" style={{ background: "linear-gradient(180deg, var(--background) 0%, #ECEDE7 100%)" }}>
+        <div className="container-wellness grid lg:grid-cols-[1.05fr_1fr] gap-16 lg:gap-20 items-center">
           <Reveal>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#C8A27A] mb-6">Mindfulness</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#C8A27A] mb-5">Mindfulness</p>
             <h1 className="heading-hero" style={{ color: "#1E3D32" }}>Habits that last a quiet lifetime.</h1>
-            <p className="text-paragraph mt-8 max-w-xl">
+            <p className="mt-7 max-w-lg text-[17px] md:text-[18px] leading-[1.75] text-[#4B4B4B]">
               Guided meditations, mindful walks and gentle daily practices designed to fit your life — not interrupt it. Build presence, kindly.
             </p>
-            <Link to="/onboarding" className="btn-cta btn-cta-mind mt-12 inline-flex">Begin practising</Link>
+            <Link to="/onboarding" className="btn-cta btn-cta-mind btn-cta-glow mt-10 inline-flex">Begin practising</Link>
           </Reveal>
           <Reveal delay={150}>
-            <div className="relative">
-              <div className="absolute -inset-6 rounded-[40px] bg-gradient-to-br from-[#7FA38D]/40 to-[#C8A27A]/30 blur-3xl" />
-              <img src={hero} alt="Person meditating in a sunlit forest" width={1280} height={1280} className="relative rounded-[40px] w-full h-[560px] object-cover shadow-[0_30px_80px_rgba(30,61,50,0.2)]" />
+            <div className="relative animate-[parallax-rise_1.4s_cubic-bezier(0.22,1,0.36,1)_both]">
+              <div className="absolute -inset-8 rounded-[44px] bg-gradient-to-br from-[#7FA38D]/40 to-[#C8A27A]/30 blur-3xl animate-[float_10s_ease-in-out_infinite]" />
+              <img src={hero} alt="Person meditating in a sunlit forest" width={1280} height={1280} className="relative rounded-[40px] w-full h-[520px] object-cover shadow-[0_30px_80px_rgba(30,61,50,0.22)]" />
             </div>
           </Reveal>
         </div>
