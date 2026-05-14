@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../lib/firebase";
 
 export const Route = createFileRoute("/signin")({
   head: () => ({ meta: [{ title: "Welcome back — Stillwave" }] }),
@@ -9,6 +11,18 @@ export const Route = createFileRoute("/signin")({
 function SignIn() {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
+  const handleGoogleLogin = async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+
+    console.log("User:", result.user);
+
+    alert("Login successful!");
+  } catch (error) {
+    console.error(error);
+    alert("Google sign in failed");
+  }
+};
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center px-5 py-10 bg-[var(--background)]">
       {/* Soft glow background */}
@@ -44,7 +58,10 @@ function SignIn() {
             <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#D7D7D2] to-transparent" />
           </div>
 
-          <button className="w-full h-[54px] rounded-[16px] border-[1.5px] border-[#E2E2DD] bg-white/70 hover:bg-white flex items-center justify-center gap-3 text-[15.5px] font-semibold text-[#2C2C2C] hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+         <button
+  onClick={handleGoogleLogin}
+  className="w-full h-[54px] rounded-[16px] border-[1.5px] border-[#E2E2DD] bg-white/70 hover:bg-white flex items-center justify-center gap-3 text-[15.5px] font-semibold text-[#2C2C2C] hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+>
             <GoogleIcon /> Continue with Google
           </button>
 
