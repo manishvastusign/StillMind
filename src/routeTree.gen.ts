@@ -9,8 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StressRouteImport } from './routes/stress'
+import { Route as SleepRouteImport } from './routes/sleep'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SigninRouteImport } from './routes/signin'
+import { Route as ScreeningRouteImport } from './routes/screening'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as MindfulnessRouteImport } from './routes/mindfulness'
 import { Route as IndexRouteImport } from './routes/index'
 
+const StressRoute = StressRouteImport.update({
+  id: '/stress',
+  path: '/stress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SleepRoute = SleepRouteImport.update({
+  id: '/sleep',
+  path: '/sleep',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SigninRoute = SigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScreeningRoute = ScreeningRouteImport.update({
+  id: '/screening',
+  path: '/screening',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MindfulnessRoute = MindfulnessRouteImport.update({
+  id: '/mindfulness',
+  path: '/mindfulness',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +61,130 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mindfulness': typeof MindfulnessRoute
+  '/onboarding': typeof OnboardingRoute
+  '/screening': typeof ScreeningRoute
+  '/signin': typeof SigninRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sleep': typeof SleepRoute
+  '/stress': typeof StressRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mindfulness': typeof MindfulnessRoute
+  '/onboarding': typeof OnboardingRoute
+  '/screening': typeof ScreeningRoute
+  '/signin': typeof SigninRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sleep': typeof SleepRoute
+  '/stress': typeof StressRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/mindfulness': typeof MindfulnessRoute
+  '/onboarding': typeof OnboardingRoute
+  '/screening': typeof ScreeningRoute
+  '/signin': typeof SigninRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sleep': typeof SleepRoute
+  '/stress': typeof StressRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/mindfulness'
+    | '/onboarding'
+    | '/screening'
+    | '/signin'
+    | '/sitemap.xml'
+    | '/sleep'
+    | '/stress'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/mindfulness'
+    | '/onboarding'
+    | '/screening'
+    | '/signin'
+    | '/sitemap.xml'
+    | '/sleep'
+    | '/stress'
+  id:
+    | '__root__'
+    | '/'
+    | '/mindfulness'
+    | '/onboarding'
+    | '/screening'
+    | '/signin'
+    | '/sitemap.xml'
+    | '/sleep'
+    | '/stress'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MindfulnessRoute: typeof MindfulnessRoute
+  OnboardingRoute: typeof OnboardingRoute
+  ScreeningRoute: typeof ScreeningRoute
+  SigninRoute: typeof SigninRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SleepRoute: typeof SleepRoute
+  StressRoute: typeof StressRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/stress': {
+      id: '/stress'
+      path: '/stress'
+      fullPath: '/stress'
+      preLoaderRoute: typeof StressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sleep': {
+      id: '/sleep'
+      path: '/sleep'
+      fullPath: '/sleep'
+      preLoaderRoute: typeof SleepRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signin': {
+      id: '/signin'
+      path: '/signin'
+      fullPath: '/signin'
+      preLoaderRoute: typeof SigninRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/screening': {
+      id: '/screening'
+      path: '/screening'
+      fullPath: '/screening'
+      preLoaderRoute: typeof ScreeningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mindfulness': {
+      id: '/mindfulness'
+      path: '/mindfulness'
+      fullPath: '/mindfulness'
+      preLoaderRoute: typeof MindfulnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +197,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MindfulnessRoute: MindfulnessRoute,
+  OnboardingRoute: OnboardingRoute,
+  ScreeningRoute: ScreeningRoute,
+  SigninRoute: SigninRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SleepRoute: SleepRoute,
+  StressRoute: StressRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

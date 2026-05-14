@@ -1,0 +1,140 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Navbar } from "@/components/site/Navbar";
+import { Footer } from "@/components/site/Footer";
+import { FAQ } from "@/components/site/FAQ";
+import { Testimonials } from "@/components/site/Testimonials";
+import { Reveal } from "@/components/site/Reveal";
+import { ImmersiveCTA } from "@/components/site/ImmersiveCTA";
+import hero from "@/assets/hero-mindfulness.jpg";
+import card from "@/assets/card-mindfulness.jpg";
+
+export const Route = createFileRoute("/mindfulness")({
+  head: () => ({
+    meta: [
+      { title: "Mindfulness — Stillwave" },
+      { name: "description", content: "Mindfulness, meditation and guided programs to build healthy habits that last." },
+    ],
+  }),
+  component: MindPage,
+});
+
+const cats = [
+  ["Daily Mindfulness","A 5-minute pause for ordinary days."],
+  ["Guided Meditation","Hundreds of sessions, every mood covered."],
+  ["Breath Awareness","Use your breath as the simplest anchor."],
+  ["Mindful Walking","Take your practice into the world."],
+  ["Emotional Presence","Sit kindly with whatever's here."],
+  ["Gratitude Practice","Train your attention toward what's good."],
+];
+
+const habits = [
+  "Reduce Mental Noise","Improve Emotional Awareness","Build Calm Daily Routines","Increase Focus","Sleep More Peacefully","Feel More Present"
+];
+
+function MindPage() {
+  return (
+    <div className="min-h-screen bg-[var(--background)]" style={{ ["--deep-green" as never]: "#2F6B52" }}>
+      <Navbar accent="#2F6B52" />
+
+      <section className="pt-[120px] pb-32" style={{ background: "linear-gradient(180deg, var(--background) 0%, #ECEDE7 100%)" }}>
+        <div className="container-wellness grid lg:grid-cols-2 gap-20 items-center">
+          <Reveal>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#C8A27A] mb-6">Mindfulness</p>
+            <h1 className="heading-hero" style={{ color: "#1E3D32" }}>Habits that last a quiet lifetime.</h1>
+            <p className="text-paragraph mt-8 max-w-xl">
+              Guided meditations, mindful walks and gentle daily practices designed to fit your life — not interrupt it. Build presence, kindly.
+            </p>
+            <Link to="/onboarding" className="btn-cta btn-cta-mind mt-12 inline-flex">Begin practising</Link>
+          </Reveal>
+          <Reveal delay={150}>
+            <div className="relative">
+              <div className="absolute -inset-6 rounded-[40px] bg-gradient-to-br from-[#7FA38D]/40 to-[#C8A27A]/30 blur-3xl" />
+              <img src={hero} alt="Person meditating in a sunlit forest" width={1280} height={1280} className="relative rounded-[40px] w-full h-[560px] object-cover shadow-[0_30px_80px_rgba(30,61,50,0.2)]" />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* CATEGORIES */}
+      <section className="py-32">
+        <div className="container-wellness">
+          <Reveal><h2 className="heading-section mb-16 max-w-2xl" style={{ color: "#1E3D32" }}>Six paths into presence.</h2></Reveal>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {cats.map(([t, d], i) => (
+              <Reveal key={t} delay={i * 60}>
+                <div className="card-wellness h-full overflow-hidden">
+                  <img src={card} alt="" loading="lazy" className="w-full h-48 object-cover rounded-[20px] mb-6" />
+                  <h3 className="text-2xl font-semibold" style={{ color: "#2C2C2C" }}>{t}</h3>
+                  <p className="text-[#5B5B5B] mt-3">{d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HABITS */}
+      <section className="py-32 bg-[#ECEDE7]">
+        <div className="container-wellness">
+          <Reveal><h2 className="heading-section text-center max-w-3xl mx-auto" style={{ color: "#1E3D32" }}>What a mindful life makes room for.</h2></Reveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+            {habits.map((h, i) => (
+              <Reveal key={h} delay={i * 50}>
+                <div className="card-wellness flex items-center gap-5 h-full">
+                  <div className="w-3 h-12 rounded-full" style={{ background: "var(--gradient-mind)" }} />
+                  <span className="text-xl font-semibold" style={{ color: "#2C2C2C" }}>{h}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* IMMERSIVE NATURE */}
+      <section className="relative overflow-hidden py-40 text-center" style={{ background: "linear-gradient(135deg, #1E3D32 0%, #4D7C5A 50%, #A08D6B 100%)" }}>
+        <div className="container-wellness relative">
+          <Reveal>
+            <h2 className="heading-section text-white max-w-3xl mx-auto" style={{ color: "#fff" }}>The forest is always practising.</h2>
+            <p className="mt-6 text-[19px] text-white/85 max-w-xl mx-auto">Step into a five-minute mindful walk, narrated by birdsong and slow light through trees.</p>
+            <Link to="/onboarding" className="btn-cta btn-cta-mind mt-12 inline-flex" style={{ boxShadow: "0 0 80px rgba(127,163,141,0.4)" }}>
+              Take the walk
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="py-32">
+        <div className="container-wellness">
+          <Reveal><h2 className="heading-section text-center mb-16" style={{ color: "#1E3D32" }}>Quiet transformations.</h2></Reveal>
+          <Testimonials gradient="linear-gradient(180deg, #2F6B52 0%, #7FA38D 100%)" items={[
+            { quote: "Ten minutes a day. That's all it took to feel like myself again.", name: "Eli", location: "Lisbon" },
+            { quote: "Stillwave taught me how to be a friend to my own mind.", name: "Hana", location: "Kyoto" },
+            { quote: "I no longer wake up reaching for my phone. I reach for a breath instead.", name: "Marcus", location: "Cape Town" },
+          ]} />
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-32 bg-[var(--background-alt)]">
+        <div className="container-wellness">
+          <Reveal><h2 className="heading-section text-center mb-16" style={{ color: "#1E3D32" }}>Common curiosities.</h2></Reveal>
+          <FAQ items={[
+            { q: "What is mindfulness?", a: "The simple, quiet act of paying kind attention to what's happening — without trying to change it." },
+            { q: "How often should I practice?", a: "Daily, even if briefly. Five minutes most days outperforms one long Sunday session." },
+            { q: "Do I need to sit cross-legged?", a: "Not at all. Comfort is part of the practice. A chair, a bed, even a walk all work." },
+            { q: "Will it make me more productive?", a: "Maybe. But that's not why we're here. We're here to make you more *present*." },
+          ]} />
+        </div>
+      </section>
+
+      <ImmersiveCTA
+        title="Begin practising. Begin again. Begin now."
+        subtitle="Free for two weeks. Then for as long as it serves you."
+        cta="Start practising"
+        overlay="linear-gradient(135deg, rgba(30,61,50,0.92), rgba(160,141,107,0.55))"
+      />
+      <Footer />
+    </div>
+  );
+}
