@@ -97,15 +97,15 @@ function Onboarding() {
   return (
     <div className="min-h-screen bg-[var(--background)] flex flex-col">
       <TopBar progress={progress} onBack={back} canBack={step > 0} />
-      <div className="flex-1 flex items-center">
-        <div key={step} className="max-w-[720px] w-full mx-auto px-6 py-14 md:py-16 animate-step-in">
-          <p className="text-[14px] tracking-wide uppercase font-semibold text-[#7FA38D]">Question {step + 1} of {total}</p>
-          <h1 className="mt-5 text-[32px] md:text-[44px] font-semibold leading-[1.18] tracking-tight" style={{ color: "#2C2C2C" }}>
+      <div className="flex-1 flex items-start md:items-center">
+        <div key={step} className="max-w-[680px] w-full mx-auto px-6 py-10 md:py-12 animate-step-in">
+          <p className="text-[12.5px] tracking-[0.18em] uppercase font-semibold text-[#7FA38D]">Question {step + 1} of {total}</p>
+          <h1 className="mt-4 text-[28px] md:text-[36px] font-semibold leading-[1.2] tracking-tight" style={{ color: "#2C2C2C" }}>
             {s.q}
           </h1>
-          <p className="mt-4 text-[17px] md:text-[19px] leading-[1.6] text-[#5B5B5B] max-w-xl">{s.sub}</p>
+          <p className="mt-3 text-[15.5px] md:text-[16.5px] leading-[1.6] text-[#5B5B5B] max-w-lg">{s.sub}</p>
 
-          <div className="mt-10 md:mt-12 space-y-3.5" role="radiogroup" aria-label={s.q}>
+          <div className="mt-8 md:mt-10 space-y-3" role="radiogroup" aria-label={s.q}>
             {s.options.map((o, i) => {
               const active = selected === i;
               return (
