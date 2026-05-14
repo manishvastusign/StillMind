@@ -51,21 +51,39 @@ function Onboarding() {
   }, [step, answers, done]);
 
   if (done) {
+    const recs = [
+      { title: "Sleep Stories", sub: "Drift off to gentle voices and slow soundscapes.", grad: "linear-gradient(135deg, #1B2B34, #3B82F6)" },
+      { title: "Guided Breathwork", sub: "Five-minute resets for stress and anxious moments.", grad: "linear-gradient(135deg, #2F7D6A, #4F7CFF)" },
+      { title: "Daily Mindfulness", sub: "A calming pause woven into your everyday rhythm.", grad: "linear-gradient(135deg, #2F6B52, #7FA38D)" },
+    ];
     return (
       <div className="min-h-screen bg-[var(--background)] flex flex-col">
         <TopBar progress={100} onBack={() => setDone(false)} />
         <div className="flex-1 flex items-center">
-          <div className="max-w-[760px] w-full mx-auto px-6 py-20 text-center">
-            <div className="w-32 h-32 mx-auto rounded-full mb-10 animate-[breathe_6s_ease-in-out_infinite]" style={{ background: "var(--gradient-primary)", boxShadow: "0 30px 80px rgba(59,130,246,0.3)" }} />
-            <h1 className="text-[36px] md:text-[48px] font-semibold leading-[1.18] tracking-tight" style={{ color: "#2C2C2C" }}>
+          <div className="max-w-[820px] w-full mx-auto px-6 py-16 text-center animate-step-in">
+            <div className="w-28 h-28 mx-auto rounded-full mb-8 animate-[breathe_6s_ease-in-out_infinite]" style={{ background: "var(--gradient-primary)", boxShadow: "0 30px 80px rgba(59,130,246,0.3), 0 0 0 10px rgba(127,163,141,0.08)" }} />
+            <h1 className="text-[30px] md:text-[40px] font-semibold leading-[1.18] tracking-tight" style={{ color: "#2C2C2C" }}>
               Your gentle path is ready.
             </h1>
-            <p className="text-paragraph mt-6 max-w-xl mx-auto">
-              Based on what you shared, we've shaped a personalised wellness journey — sleep stories, breathwork, and mindfulness sessions tuned to you.
+            <p className="mt-5 max-w-lg mx-auto text-[16px] md:text-[17px] leading-[1.7] text-[#5B5B5B]">
+              Based on what you shared, we've shaped a personalised wellness journey just for you.
             </p>
-            <button onClick={() => navigate({ to: "/signin" })} className="btn-cta mt-12">Continue to your plan</button>
-            <div className="mt-6">
-              <button onClick={() => navigate({ to: "/" })} className="text-[#4B4B4B] text-sm hover:text-[var(--deep-green)] transition-colors">Maybe later</button>
+
+            <div className="mt-10 grid sm:grid-cols-3 gap-4 text-left">
+              {recs.map((r, i) => (
+                <div key={r.title} className="card-hover rounded-[22px] p-6 text-white relative overflow-hidden" style={{ background: r.grad, animation: `step-in 0.6s cubic-bezier(0.22,1,0.36,1) ${0.1 + i * 0.1}s both` }}>
+                  <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0) 60%)" }} />
+                  <div className="relative">
+                    <div className="text-[15px] font-semibold mb-1.5">{r.title}</div>
+                    <p className="text-[13px] leading-[1.55] text-white/80">{r.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button onClick={() => navigate({ to: "/signin" })} className="btn-cta btn-cta-glow mt-12">Begin your journey</button>
+            <div className="mt-5">
+              <button onClick={() => navigate({ to: "/" })} className="text-[#6B7280] text-[14px] hover:text-[var(--deep-green)] transition-colors underline-offset-4 hover:underline">Maybe later</button>
             </div>
           </div>
         </div>
@@ -79,15 +97,15 @@ function Onboarding() {
   return (
     <div className="min-h-screen bg-[var(--background)] flex flex-col">
       <TopBar progress={progress} onBack={back} canBack={step > 0} />
-      <div className="flex-1 flex items-center">
-        <div key={step} className="max-w-[720px] w-full mx-auto px-6 py-14 md:py-16 animate-step-in">
-          <p className="text-[14px] tracking-wide uppercase font-semibold text-[#7FA38D]">Question {step + 1} of {total}</p>
-          <h1 className="mt-5 text-[32px] md:text-[44px] font-semibold leading-[1.18] tracking-tight" style={{ color: "#2C2C2C" }}>
+      <div className="flex-1 flex items-start md:items-center">
+        <div key={step} className="max-w-[680px] w-full mx-auto px-6 py-10 md:py-12 animate-step-in">
+          <p className="text-[12.5px] tracking-[0.18em] uppercase font-semibold text-[#7FA38D]">Question {step + 1} of {total}</p>
+          <h1 className="mt-4 text-[28px] md:text-[36px] font-semibold leading-[1.2] tracking-tight" style={{ color: "#2C2C2C" }}>
             {s.q}
           </h1>
-          <p className="mt-4 text-[17px] md:text-[19px] leading-[1.6] text-[#5B5B5B] max-w-xl">{s.sub}</p>
+          <p className="mt-3 text-[15.5px] md:text-[16.5px] leading-[1.6] text-[#5B5B5B] max-w-lg">{s.sub}</p>
 
-          <div className="mt-10 md:mt-12 space-y-3.5" role="radiogroup" aria-label={s.q}>
+          <div className="mt-8 md:mt-10 space-y-3" role="radiogroup" aria-label={s.q}>
             {s.options.map((o, i) => {
               const active = selected === i;
               return (
@@ -96,22 +114,22 @@ function Onboarding() {
                   onClick={() => select(i)}
                   role="radio"
                   aria-checked={active}
-                  className="group relative w-full text-left rounded-[18px] transition-all duration-400 ease-out focus:outline-none"
+                  className="group relative w-full text-left rounded-[18px] transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] focus:outline-none hover:-translate-y-[2px]"
                   style={{
                     background: "#FFFFFF",
-                    border: active ? "1.5px solid transparent" : "1.5px solid #E4E4DF",
+                    border: active ? "1.5px solid transparent" : "1.5px solid #E8E8E2",
                     backgroundImage: active
-                      ? "linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(90deg, #7FA38D 0%, #9CC4D9 100%)"
+                      ? "linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(120deg, #7FA38D 0%, #9CC4D9 60%, #B8A88A 100%)"
                       : undefined,
                     backgroundOrigin: active ? "border-box" : undefined,
                     backgroundClip: active ? "padding-box, border-box" : undefined,
                     boxShadow: active
-                      ? "0 14px 38px rgba(127,163,141,0.18), 0 2px 6px rgba(59,130,246,0.06)"
+                      ? "0 18px 44px -14px rgba(127,163,141,0.45), 0 4px 12px rgba(59,130,246,0.08), 0 0 0 6px rgba(127,163,141,0.06)"
                       : "0 1px 2px rgba(0,0,0,0.02)",
-                    transform: active ? "translateY(-1px)" : "none",
+                    transform: active ? "translateY(-2px)" : "none",
                   }}
                 >
-                  <div className="flex items-center justify-between rounded-[16px] px-6 py-5 text-[17px] md:text-[18px] font-medium" style={{ color: "#2C2C2C" }}>
+                  <div className="flex items-center justify-between rounded-[16px] px-6 py-[18px] text-[16px] md:text-[17px] font-medium" style={{ color: "#2C2C2C" }}>
                     <span>{o}</span>
                     <span
                       className="w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300"
@@ -128,16 +146,16 @@ function Onboarding() {
             })}
           </div>
 
-          <div className="mt-14 flex flex-col items-center gap-4">
+          <div className="mt-10 md:mt-12 flex flex-col items-center gap-3.5">
             <button
               onClick={advance}
               disabled={selected === null}
-              className="btn-cta disabled:!bg-[#D9D9D9] disabled:!shadow-none disabled:cursor-not-allowed disabled:hover:!translate-y-0 disabled:hover:!filter-none"
-              style={selected === null ? { background: "#D9D9D9", boxShadow: "none" } : undefined}
+              className="btn-cta btn-cta-glow disabled:!bg-[#D9D9D9] disabled:!shadow-none disabled:cursor-not-allowed disabled:hover:!translate-y-0 disabled:hover:!filter-none"
+              style={selected === null ? { background: "#D9D9D9", boxShadow: "none", animation: "none" } : undefined}
             >
               {step === total - 1 ? "Finish" : "Continue"}
             </button>
-            <button onClick={advance} className="text-[#4B4B4B] text-sm hover:text-[var(--deep-green)] transition-colors">
+            <button onClick={advance} className="text-[#6B7280] text-[13.5px] hover:text-[var(--deep-green)] transition-colors underline-offset-4 hover:underline">
               Skip for now
             </button>
           </div>
@@ -149,15 +167,24 @@ function Onboarding() {
 
 function TopBar({ progress, onBack, canBack = true }: { progress: number; onBack: () => void; canBack?: boolean }) {
   return (
-    <div className="px-6 pt-8 max-w-[760px] w-full mx-auto">
+    <div className="px-6 pt-7 max-w-[720px] w-full mx-auto">
       <div className="flex items-center gap-4">
-        <button onClick={onBack} disabled={!canBack} className="w-10 h-10 rounded-full flex items-center justify-center text-[#4B4B4B] hover:bg-[#ECECEC] transition disabled:opacity-30">
-          <ArrowLeft size={20} />
+        <button onClick={onBack} disabled={!canBack} className="w-9 h-9 rounded-full flex items-center justify-center text-[#4B4B4B] hover:bg-[#ECECEC] transition disabled:opacity-30">
+          <ArrowLeft size={18} />
         </button>
-        <div className="flex-1 h-[6px] rounded-full bg-[#DADADA] overflow-hidden">
-          <div className="h-full transition-all duration-700 ease-out" style={{ width: `${progress}%`, background: "var(--gradient-progress)" }} />
+        <div className="flex-1 h-[8px] rounded-full bg-[#E4E4DF] overflow-hidden relative">
+          <div
+            className="h-full rounded-full transition-[width] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+            style={{
+              width: `${progress}%`,
+              background: "linear-gradient(90deg, #7FA38D 0%, #9CC4D9 60%, #B8A88A 100%)",
+              backgroundSize: "200% 100%",
+              animation: "gradient-pan 8s ease-in-out infinite",
+              boxShadow: "0 0 16px rgba(127,163,141,0.35)",
+            }}
+          />
         </div>
-        <span className="text-sm font-semibold text-[#6B7280]">{Math.round(progress)}%</span>
+        <span className="text-[12px] font-medium text-[#9A9A94] tabular-nums w-9 text-right">{Math.round(progress)}%</span>
       </div>
     </div>
   );

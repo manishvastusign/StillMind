@@ -36,36 +36,38 @@ function MindPage() {
     <div className="min-h-screen bg-[var(--background)]" style={{ ["--deep-green" as never]: "#2F6B52" }}>
       <Navbar accent="#2F6B52" />
 
-      <section className="pt-[120px] pb-32" style={{ background: "linear-gradient(180deg, var(--background) 0%, #ECEDE7 100%)" }}>
-        <div className="container-wellness grid lg:grid-cols-2 gap-20 items-center">
+      <section className="pt-[140px] pb-32 md:pb-40" style={{ background: "linear-gradient(180deg, var(--background) 0%, #ECEDE7 100%)" }}>
+        <div className="container-wellness grid lg:grid-cols-[1.05fr_1fr] gap-16 lg:gap-20 items-center">
           <Reveal>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#C8A27A] mb-6">Mindfulness</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#C8A27A] mb-5">Mindfulness</p>
             <h1 className="heading-hero" style={{ color: "#1E3D32" }}>Habits that last a quiet lifetime.</h1>
-            <p className="text-paragraph mt-8 max-w-xl">
+            <p className="mt-7 max-w-lg text-[17px] md:text-[18px] leading-[1.75] text-[#4B4B4B]">
               Guided meditations, mindful walks and gentle daily practices designed to fit your life — not interrupt it. Build presence, kindly.
             </p>
-            <Link to="/onboarding" className="btn-cta btn-cta-mind mt-12 inline-flex">Begin practising</Link>
+            <Link to="/onboarding" className="btn-cta btn-cta-mind btn-cta-glow mt-10 inline-flex">Begin practising</Link>
           </Reveal>
           <Reveal delay={150}>
-            <div className="relative">
-              <div className="absolute -inset-6 rounded-[40px] bg-gradient-to-br from-[#7FA38D]/40 to-[#C8A27A]/30 blur-3xl" />
-              <img src={hero} alt="Person meditating in a sunlit forest" width={1280} height={1280} className="relative rounded-[40px] w-full h-[560px] object-cover shadow-[0_30px_80px_rgba(30,61,50,0.2)]" />
+            <div className="relative animate-[parallax-rise_1.4s_cubic-bezier(0.22,1,0.36,1)_both]">
+              <div className="absolute -inset-8 rounded-[44px] bg-gradient-to-br from-[#7FA38D]/40 to-[#C8A27A]/30 blur-3xl animate-[float_10s_ease-in-out_infinite]" />
+              <img src={hero} alt="Person meditating in a sunlit forest" width={1280} height={1280} className="relative rounded-[40px] w-full h-[520px] object-cover shadow-[0_30px_80px_rgba(30,61,50,0.22)]" />
             </div>
           </Reveal>
         </div>
       </section>
 
       {/* CATEGORIES */}
-      <section className="py-32">
+      <section className="py-28 md:py-32">
         <div className="container-wellness">
-          <Reveal><h2 className="heading-section mb-16 max-w-2xl" style={{ color: "#1E3D32" }}>Six paths into presence.</h2></Reveal>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Reveal><h2 className="heading-section mb-14 max-w-2xl" style={{ color: "#1E3D32" }}>Six paths into presence.</h2></Reveal>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
             {cats.map(([t, d], i) => (
-              <Reveal key={t} delay={i * 60}>
-                <div className="card-wellness h-full overflow-hidden">
-                  <img src={card} alt="" loading="lazy" className="w-full h-48 object-cover rounded-[20px] mb-6" />
-                  <h3 className="text-2xl font-semibold" style={{ color: "#2C2C2C" }}>{t}</h3>
-                  <p className="text-[#5B5B5B] mt-3">{d}</p>
+              <Reveal key={t} delay={i * 70}>
+                <div className="card-wellness card-hover h-full overflow-hidden !p-7">
+                  <div className="overflow-hidden rounded-[20px] mb-7">
+                    <img src={card} alt="" loading="lazy" className="card-img w-full h-44 object-cover" />
+                  </div>
+                  <h3 className="text-[22px] font-semibold leading-tight" style={{ color: "#2C2C2C" }}>{t}</h3>
+                  <p className="text-[#5B5B5B] mt-3 leading-[1.65]">{d}</p>
                 </div>
               </Reveal>
             ))}
@@ -80,9 +82,9 @@ function MindPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
             {habits.map((h, i) => (
               <Reveal key={h} delay={i * 50}>
-                <div className="card-wellness flex items-center gap-5 h-full">
-                  <div className="w-3 h-12 rounded-full" style={{ background: "var(--gradient-mind)" }} />
-                  <span className="text-xl font-semibold" style={{ color: "#2C2C2C" }}>{h}</span>
+                <div className="card-wellness card-hover flex items-center gap-5 h-full !p-7 !rounded-[24px]">
+                  <div className="w-2.5 h-11 rounded-full" style={{ background: "var(--gradient-mind)" }} />
+                  <span className="text-[17px] md:text-[18px] font-semibold" style={{ color: "#2C2C2C" }}>{h}</span>
                 </div>
               </Reveal>
             ))}
@@ -91,7 +93,7 @@ function MindPage() {
       </section>
 
       {/* IMMERSIVE NATURE */}
-      <section className="relative overflow-hidden py-40 text-center" style={{ background: "linear-gradient(135deg, #1E3D32 0%, #4D7C5A 50%, #A08D6B 100%)" }}>
+      <section className="relative overflow-hidden py-32 md:py-40 text-center" style={{ background: "linear-gradient(135deg, #1E3D32 0%, #4D7C5A 50%, #A08D6B 100%)", backgroundSize: "200% 200%", animation: "gradient-pan 18s ease-in-out infinite" }}>
         <div className="container-wellness relative">
           <Reveal>
             <h2 className="heading-section text-white max-w-3xl mx-auto" style={{ color: "#fff" }}>The forest is always practising.</h2>
