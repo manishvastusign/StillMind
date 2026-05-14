@@ -82,9 +82,9 @@ function MindPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
             {habits.map((h, i) => (
               <Reveal key={h} delay={i * 50}>
-                <div className="card-wellness flex items-center gap-5 h-full">
-                  <div className="w-3 h-12 rounded-full" style={{ background: "var(--gradient-mind)" }} />
-                  <span className="text-xl font-semibold" style={{ color: "#2C2C2C" }}>{h}</span>
+                <div className="card-wellness card-hover flex items-center gap-5 h-full !p-7 !rounded-[24px]">
+                  <div className="w-2.5 h-11 rounded-full" style={{ background: "var(--gradient-mind)" }} />
+                  <span className="text-[17px] md:text-[18px] font-semibold" style={{ color: "#2C2C2C" }}>{h}</span>
                 </div>
               </Reveal>
             ))}
