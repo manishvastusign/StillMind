@@ -93,7 +93,7 @@ function MindPage() {
       </section>
 
       {/* IMMERSIVE NATURE */}
-      <section className="relative overflow-hidden py-40 text-center" style={{ background: "linear-gradient(135deg, #1E3D32 0%, #4D7C5A 50%, #A08D6B 100%)" }}>
+      <section className="relative overflow-hidden py-32 md:py-40 text-center" style={{ background: "linear-gradient(135deg, #1E3D32 0%, #4D7C5A 50%, #A08D6B 100%)", backgroundSize: "200% 200%", animation: "gradient-pan 18s ease-in-out infinite" }}>
         <div className="container-wellness relative">
           <Reveal>
             <h2 className="heading-section text-white max-w-3xl mx-auto" style={{ color: "#fff" }}>The forest is always practising.</h2>
