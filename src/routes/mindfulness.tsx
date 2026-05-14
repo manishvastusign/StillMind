@@ -56,16 +56,18 @@ function MindPage() {
       </section>
 
       {/* CATEGORIES */}
-      <section className="py-32">
+      <section className="py-28 md:py-32">
         <div className="container-wellness">
-          <Reveal><h2 className="heading-section mb-16 max-w-2xl" style={{ color: "#1E3D32" }}>Six paths into presence.</h2></Reveal>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Reveal><h2 className="heading-section mb-14 max-w-2xl" style={{ color: "#1E3D32" }}>Six paths into presence.</h2></Reveal>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
             {cats.map(([t, d], i) => (
-              <Reveal key={t} delay={i * 60}>
-                <div className="card-wellness h-full overflow-hidden">
-                  <img src={card} alt="" loading="lazy" className="w-full h-48 object-cover rounded-[20px] mb-6" />
-                  <h3 className="text-2xl font-semibold" style={{ color: "#2C2C2C" }}>{t}</h3>
-                  <p className="text-[#5B5B5B] mt-3">{d}</p>
+              <Reveal key={t} delay={i * 70}>
+                <div className="card-wellness card-hover h-full overflow-hidden !p-7">
+                  <div className="overflow-hidden rounded-[20px] mb-7">
+                    <img src={card} alt="" loading="lazy" className="card-img w-full h-44 object-cover" />
+                  </div>
+                  <h3 className="text-[22px] font-semibold leading-tight" style={{ color: "#2C2C2C" }}>{t}</h3>
+                  <p className="text-[#5B5B5B] mt-3 leading-[1.65]">{d}</p>
                 </div>
               </Reveal>
             ))}
