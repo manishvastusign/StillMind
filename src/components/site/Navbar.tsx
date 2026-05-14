@@ -61,10 +61,10 @@ export function Navbar({ accent = "var(--deep-green)" }: { accent?: string }) {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Link to="/signin" className="hidden sm:inline text-[15px] font-semibold text-[#4B4B4B] hover:text-[var(--deep-green)] transition-colors">
+          <Link to="/signin" className="hidden sm:inline text-[14.5px] font-semibold text-[#4B4B4B] hover:text-[var(--deep-green)] transition-colors">
             Sign in
           </Link>
-          <Link to="/onboarding" className="btn-cta" style={{ padding: "14px 30px", fontSize: 16 }}>
+          <Link to="/onboarding" className="btn-cta btn-cta-glow" style={{ padding: "12px 26px", fontSize: 15 }}>
             Try Free
           </Link>
         </div>
