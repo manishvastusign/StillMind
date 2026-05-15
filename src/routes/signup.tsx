@@ -4,31 +4,52 @@ import { useState } from "react";
 import { auth, googleProvider } from "../lib/firebase";
 
 import {
+  createUserWithEmailAndPassword,
   signInWithPopup,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
+  updateProfile,
 } from "firebase/auth";
 
-export const Route = createFileRoute("/signin")({
+export const Route = createFileRoute("/signup")({
   head: () => ({
-    meta: [{ title: "Welcome back — Stillwave" }],
+    meta: [{ title: "Create Account — Stillwave" }],
   }),
-  component: SignIn,
+  component: SignUp,
 });
 
-function SignIn() {
+function SignUp() {
 
   const [loading, setLoading] = useState(false);
 
+  const [name, setName] = useState("");
+
   const [email, setEmail] = useState("");
 
-  const [pw, setPw] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleEmailLogin = async () => {
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-    if (!email || !pw) {
+  const handleSignUp = async () => {
 
-      alert("Please enter email and password");
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !confirmPassword
+    ) {
+
+      alert("Please fill all fields");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+
+      alert("Passwords do not match");
+      return;
+    }
+
+    if (password.length < 6) {
+
+      alert("Password should be at least 6 characters");
       return;
     }
 
@@ -36,13 +57,24 @@ function SignIn() {
 
       setLoading(true);
 
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        pw
+      const userCredential =
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+      await updateProfile(
+        userCredential.user,
+        {
+          displayName: name,
+        }
       );
 
-      window.location.href = "/dashboard/home";
+      alert("Account created successfully");
+
+      window.location.href =
+        "/dashboard/home";
 
     } catch (error: any) {
 
@@ -54,7 +86,7 @@ function SignIn() {
     }
   };
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleSignup = async () => {
 
     try {
 
@@ -70,30 +102,7 @@ function SignIn() {
 
       console.error(error);
 
-      alert("Google sign in failed");
-    }
-  };
-
-  const handleForgotPassword = async () => {
-
-    if (!email) {
-
-      alert("Please enter your email first");
-      return;
-    }
-
-    try {
-
-      await sendPasswordResetEmail(
-        auth,
-        email
-      );
-
-      alert("Password reset email sent");
-
-    } catch (error: any) {
-
-      alert(error.message);
+      alert("Google sign up failed");
     }
   };
 
@@ -179,7 +188,7 @@ function SignIn() {
               leading-[1.1]
             "
           >
-            Welcome back.
+            Create your account.
           </h1>
 
           {/* SUBTITLE */}
@@ -192,7 +201,7 @@ function SignIn() {
               leading-relaxed
             "
           >
-            Continue your wellness journey with Stillwave.
+            Begin your wellness journey with Stillwave.
           </p>
 
           {/* FORM */}
@@ -202,6 +211,49 @@ function SignIn() {
               e.preventDefault()
             }
           >
+
+            {/* NAME */}
+            <div>
+
+              <label
+                className="
+                  block
+                  mb-2
+                  text-[14px]
+                  font-[400]
+                  tracking-[0.01em]
+                  text-white/72
+                "
+              >
+                Full Name
+              </label>
+
+              <input
+                value={name}
+                onChange={(e) =>
+                  setName(e.target.value)
+                }
+                type="text"
+                placeholder="John Doe"
+                className="
+                  w-full
+                  h-[58px]
+                  rounded-[18px]
+                  border
+                  border-white/10
+                  bg-white/[0.07]
+                  px-5
+                  text-white
+                  text-[15px]
+                  font-[400]
+                  placeholder:text-white/28
+                  outline-none
+                  focus:border-[#7FA38D]
+                  transition-all
+                "
+              />
+
+            </div>
 
             {/* EMAIL */}
             <div>
@@ -263,9 +315,11 @@ function SignIn() {
               </label>
 
               <input
-                value={pw}
+                value={password}
                 onChange={(e) =>
-                  setPw(e.target.value)
+                  setPassword(
+                    e.target.value
+                  )
                 }
                 type="password"
                 placeholder="••••••••"
@@ -289,10 +343,55 @@ function SignIn() {
 
             </div>
 
-            {/* SIGN IN BUTTON */}
+            {/* CONFIRM PASSWORD */}
+            <div>
+
+              <label
+                className="
+                  block
+                  mb-2
+                  text-[14px]
+                  font-[400]
+                  tracking-[0.01em]
+                  text-white/72
+                "
+              >
+                Confirm Password
+              </label>
+
+              <input
+                value={confirmPassword}
+                onChange={(e) =>
+                  setConfirmPassword(
+                    e.target.value
+                  )
+                }
+                type="password"
+                placeholder="••••••••"
+                className="
+                  w-full
+                  h-[58px]
+                  rounded-[18px]
+                  border
+                  border-white/10
+                  bg-white/[0.07]
+                  px-5
+                  text-white
+                  text-[15px]
+                  font-[400]
+                  placeholder:text-white/28
+                  outline-none
+                  focus:border-[#7FA38D]
+                  transition-all
+                "
+              />
+
+            </div>
+
+            {/* BUTTON */}
             <button
               type="button"
-              onClick={handleEmailLogin}
+              onClick={handleSignUp}
               disabled={loading}
               className="
                 w-full
@@ -309,8 +408,8 @@ function SignIn() {
               "
             >
               {loading
-                ? "Signing in..."
-                : "Sign In"}
+                ? "Creating Account..."
+                : "Create Account"}
             </button>
 
           </form>
@@ -337,7 +436,7 @@ function SignIn() {
 
           {/* GOOGLE BUTTON */}
           <button
-            onClick={handleGoogleLogin}
+            onClick={handleGoogleSignup}
             className="
               w-full
               h-[58px]
@@ -367,40 +466,25 @@ function SignIn() {
           <div
             className="
               mt-7
-              flex
-              items-center
-              justify-between
+              text-center
               text-[15px]
               font-[400]
+              text-white/60
             "
           >
 
-            <button
-              onClick={handleForgotPassword}
+            Already have an account?{" "}
+
+            <Link
+              to="/signin"
               className="
                 text-[#CFE8D5]
+                font-[500]
                 hover:underline
               "
             >
-              Forgot password?
-            </button>
-
-            <span className="text-white/60">
-
-              New here?{" "}
-
-              <Link
-                to="/signup"
-                className="
-                  text-[#CFE8D5]
-                  font-[500]
-                  hover:underline
-                "
-              >
-                Sign up
-              </Link>
-
-            </span>
+              Sign in
+            </Link>
 
           </div>
 

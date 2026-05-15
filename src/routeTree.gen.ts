@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as StressRouteImport } from './routes/stress'
 import { Route as SleepRouteImport } from './routes/sleep'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SigninRouteImport } from './routes/signin'
 import { Route as ScreeningRouteImport } from './routes/screening'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -47,6 +48,11 @@ const SleepRoute = SleepRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SigninRoute = SigninRouteImport.update({
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/screening': typeof ScreeningRoute
   '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sleep': typeof SleepRoute
   '/stress': typeof StressRoute
@@ -191,6 +198,7 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/screening': typeof ScreeningRoute
   '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sleep': typeof SleepRoute
   '/stress': typeof StressRoute
@@ -218,6 +226,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/screening': typeof ScreeningRoute
   '/signin': typeof SigninRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sleep': typeof SleepRoute
   '/stress': typeof StressRoute
@@ -246,6 +255,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/screening'
     | '/signin'
+    | '/signup'
     | '/sitemap.xml'
     | '/sleep'
     | '/stress'
@@ -272,6 +282,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/screening'
     | '/signin'
+    | '/signup'
     | '/sitemap.xml'
     | '/sleep'
     | '/stress'
@@ -298,6 +309,7 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/screening'
     | '/signin'
+    | '/signup'
     | '/sitemap.xml'
     | '/sleep'
     | '/stress'
@@ -325,6 +337,7 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   ScreeningRoute: typeof ScreeningRoute
   SigninRoute: typeof SigninRoute
+  SignupRoute: typeof SignupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SleepRoute: typeof SleepRoute
   StressRoute: typeof StressRoute
@@ -351,6 +364,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signin': {
@@ -548,6 +568,7 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   ScreeningRoute: ScreeningRoute,
   SigninRoute: SigninRoute,
+  SignupRoute: SignupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SleepRoute: SleepRoute,
   StressRoute: StressRoute,

@@ -1,4 +1,4 @@
-@import "tailwindcss" source(none);
+@import "tailwindcss";
 @source "../src";
 @import "tw-animate-css";
 @import url("https://rsms.me/inter/inter.css");
@@ -219,5 +219,188 @@
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* =========================
+   STILLWAVE AUTH BACKGROUND
+========================= */
+
+.ocean-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      to bottom,
+      #08172d 0%,
+      #0c2347 35%,
+      #0d2d5f 60%,
+      #12396d 100%
+    );
+}
+
+/* WAVES */
+
+.wave {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 220px;
+  border-radius: 45%;
+  opacity: 0.18;
+  filter: blur(2px);
+  animation: waveMove linear infinite;
+}
+
+.wave-1 {
+  bottom: -120px;
+  background: #3d82c4;
+  animation-duration: 18s;
+}
+
+.wave-2 {
+  bottom: -140px;
+  background: #5ca4e6;
+  opacity: 0.12;
+  animation-duration: 24s;
+}
+
+.wave-3 {
+  bottom: -160px;
+  background: #8dc6ff;
+  opacity: 0.08;
+  animation-duration: 30s;
+}
+
+@keyframes waveMove {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateX(-4%) rotate(2deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+/* FLOATING ISLAND */
+
+.floating-island {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 120px;
+  animation: floatIsland 7s ease-in-out infinite;
+}
+
+@keyframes floatIsland {
+  0% {
+    transform: translateX(-50%) translateY(0px);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(0px);
+  }
+}
+/* =========================
+   PREMIUM AUTH BACKGROUND
+========================= */
+
+.auth-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      rgba(8, 22, 45, 0.58),
+      rgba(8, 22, 45, 0.72)
+    ),
+    url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=2070&auto=format&fit=crop");
+
+  background-size: cover;
+  background-position: center;
+
+  animation: slowZoom 28s ease-in-out infinite alternate;
+}
+
+/* SLOW CINEMATIC ZOOM */
+
+@keyframes slowZoom {
+
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.08);
+  }
+}
+
+/* EXTRA BLUE OVERLAY */
+
+.auth-scene::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(33, 74, 122, 0.25),
+      rgba(8, 20, 40, 0.65)
+    );
+
+  backdrop-filter: blur(2px);
+}
+
+/* FLOATING LIGHT */
+
+.auth-glow {
+  position: absolute;
+
+  width: 700px;
+  height: 700px;
+
+  border-radius: 999px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(120, 180, 255, 0.18),
+      transparent 70%
+    );
+
+  top: -220px;
+  right: -120px;
+
+  filter: blur(40px);
+
+  animation: glowFloat 10s ease-in-out infinite;
+}
+
+@keyframes glowFloat {
+
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(18px);
+  }
+
+  100% {
+    transform: translateY(0px);
   }
 }

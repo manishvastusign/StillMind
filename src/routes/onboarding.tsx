@@ -81,7 +81,7 @@ function Onboarding() {
               ))}
             </div>
 
-            <button onClick={() => navigate({ to: "/signin" })} className="btn-cta btn-cta-glow mt-12">Begin your journey</button>
+            <button onClick={() => navigate({ to: "/signup" })} className="btn-cta btn-cta-glow mt-12">Begin your journey</button>
             <div className="mt-5">
               <button onClick={() => navigate({ to: "/" })} className="text-[#6B7280] text-[14px] hover:text-[var(--deep-green)] transition-colors underline-offset-4 hover:underline">Maybe later</button>
             </div>
