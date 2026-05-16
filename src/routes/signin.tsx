@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { auth, googleProvider } from "../lib/firebase";
 
@@ -9,9 +10,15 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 
+const emailRegex =
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const passwordRegex =
+  /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$])[A-Za-z\d@#$]{8,}$/;
+
 export const Route = createFileRoute("/signin")({
   head: () => ({
-    meta: [{ title: "Welcome back — Stillwave" }],
+    meta: [{ title: "Welcome back — StillMind" }],
   }),
   component: SignIn,
 });
@@ -28,25 +35,46 @@ function SignIn() {
 
     if (!email || !pw) {
 
-      alert("Please enter email and password");
+      toast.error("Please enter email and password");
       return;
     }
+    // EMAIL VALIDATION
+if (!emailRegex.test(email)) {
+
+  toast.error(
+    "Please enter a valid email address"
+  );
+
+  return;
+}
+
+// PASSWORD VALIDATION
+if (!passwordRegex.test(pw)) {
+
+  toast.error(
+    "Password must be minimum 8 characters and include 1 uppercase letter, 1 number and 1 special character (@ # $)"
+  );
+
+  return;
+}
 
     try {
 
       setLoading(true);
 
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        pw
-      );
+     await signInWithEmailAndPassword(
+  auth,
+  email,
+  pw
+);
 
-      window.location.href = "/dashboard/home";
+window.location.href = "/";
+
+     
 
     } catch (error: any) {
 
-      alert(error.message);
+      toast.error(error.message);
 
     } finally {
 
@@ -63,39 +91,58 @@ function SignIn() {
         googleProvider
       );
 
-      window.location.href =
-        "/dashboard/home";
+     window.location.href = "/";
 
     } catch (error) {
 
       console.error(error);
 
-      alert("Google sign in failed");
+      toast.error("Google sign in failed");
     }
   };
 
   const handleForgotPassword = async () => {
 
-    if (!email) {
+  if (!email) {
+    toast.error("Please enter your email first");
+    return;
+  }
+if (!emailRegex.test(email)) {
 
-      alert("Please enter your email first");
-      return;
+  toast.error(
+    "Please enter a valid email address"
+  );
+
+  return;
+}
+  try {
+
+    await sendPasswordResetEmail(auth, email, {
+      url: "http://localhost:8080/signin",
+      handleCodeInApp: false,
+    });
+
+    toast.success(
+      "Password reset link sent successfully. Please check your inbox and spam folder."
+    );
+
+  } catch (error: any) {
+
+    console.error(error);
+
+    if (error.code === "auth/user-not-found") {
+      toast.error("No account found with this email");
     }
 
-    try {
-
-      await sendPasswordResetEmail(
-        auth,
-        email
-      );
-
-      alert("Password reset email sent");
-
-    } catch (error: any) {
-
-      alert(error.message);
+    else if (error.code === "auth/invalid-email") {
+      toast.error("Invalid email address");
     }
-  };
+
+    else {
+      toast.error(error.message);
+    }
+  }
+};
 
   return (
 
@@ -129,26 +176,11 @@ function SignIn() {
             className="inline-block group"
           >
 
-            <h1
-              className="
-                text-[58px]
-                leading-none
-                font-[300]
-                tracking-[-0.08em]
-                italic
-                text-white
-                opacity-95
-                transition-all
-                duration-300
-                group-hover:opacity-100
-              "
-              style={{
-                fontFamily:
-                  '"Cormorant Garamond", serif',
-              }}
-            >
-              Stillwave
-            </h1>
+            <img
+  src="/stillmind-logo.png"
+  alt="StillMind"
+  className="h-16 w-auto object-contain"
+/>
 
           </Link>
 
@@ -192,7 +224,7 @@ function SignIn() {
               leading-relaxed
             "
           >
-            Continue your wellness journey with Stillwave.
+            Continue your wellness journey with StillMind.
           </p>
 
           {/* FORM */}

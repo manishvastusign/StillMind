@@ -5,7 +5,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/screening")({
-  head: () => ({ meta: [{ title: "Wellness Screening — Stillwave" }] }),
+  head: () => ({ meta: [{ title: "Wellness Screening — StillMind" }] }),
   component: Screening,
 });
 

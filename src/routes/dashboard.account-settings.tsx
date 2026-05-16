@@ -108,8 +108,8 @@ function DashboardAccountSettingsPage() {
         />
 
         <DashboardTab
-          to="/dashboard/language"
-          label="Language"
+          to="/signin"
+          label="Logout"
         />
 
       </div>
@@ -160,7 +160,7 @@ function DashboardAccountSettingsPage() {
             font-[300]
           "
           >
-            Manage your Stillwave profile information
+            Manage your StillMind profile information
           </p>
 
           {/* FORM */}

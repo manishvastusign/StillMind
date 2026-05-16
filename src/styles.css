@@ -4,6 +4,7 @@
 @import url("https://rsms.me/inter/inter.css");
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&display=swap');
 
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -223,7 +224,7 @@
 }
 
 /* =========================
-   STILLWAVE AUTH BACKGROUND
+   STILLMIND AUTH BACKGROUND
 ========================= */
 
 .ocean-bg {

@@ -8,16 +8,15 @@ import { DashboardSidebar } from "../components/dashboard/DashboardSidebars";
 import { DashboardTopbar } from "../components/dashboard/DashboardTopbar";
 import { DashboardAmbientSound } from "../components/dashboard/DashboardAmbientSound";
 
+import { useState } from "react";
+
 export const Route = createFileRoute("/dashboard")({
   beforeLoad: ({ location }) => {
 
-    // ONLY redirect exact /dashboard
     if (location.pathname === "/dashboard") {
-
       throw redirect({
         to: "/dashboard/home",
       });
-
     }
   },
 
@@ -25,14 +24,22 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function DashboardLayout() {
+
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#091B44] text-white flex overflow-hidden">
 
       {/* AMBIENT SOUND */}
       <DashboardAmbientSound />
 
-      {/* SIDEBAR */}
-      <DashboardSidebar />
+      
+
+      {/* MOBILE SIDEBAR */}
+      <DashboardSidebar
+        mobileOpen={mobileSidebarOpen}
+        setMobileOpen={setMobileSidebarOpen}
+      />
 
       {/* MAIN */}
       <main
@@ -61,10 +68,12 @@ function DashboardLayout() {
         <div className="absolute inset-0 backdrop-blur-[1.5px] z-0" />
 
         {/* TOPBAR */}
-        <DashboardTopbar />
+        <DashboardTopbar
+          openSidebar={() => setMobileSidebarOpen(true)}
+        />
 
         {/* PAGE CONTENT */}
-        <div className="relative z-10 px-10 pb-20">
+        <div className="relative z-10 px-4 lg:px-10 pb-20">
           <Outlet />
         </div>
 

@@ -29,7 +29,7 @@ function MobileAppPage() {
       <div className="relative z-10 max-w-[980px] text-center">
 
         <p className="text-[22px] tracking-[0.4em] uppercase text-white/60">
-          Stillwave Mobile Experience
+          StillMind Mobile Experience
         </p>
 
         <h1 className="mt-8 text-[110px] leading-[0.95] tracking-[-0.08em] font-[300]">

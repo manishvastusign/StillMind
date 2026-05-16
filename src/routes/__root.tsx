@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 import {
   Outlet,
   Link,
@@ -114,6 +115,21 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
+
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: "#182B61",
+            color: "#fff",
+            border: "1px solid rgba(255,255,255,0.08)",
+            padding: "16px 20px",
+            borderRadius: "18px",
+            backdropFilter: "blur(10px)",
+          },
+        }}
+      />
     </QueryClientProvider>
   );
 }

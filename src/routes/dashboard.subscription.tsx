@@ -35,8 +35,8 @@ function DashboardSubscriptionPage() {
         />
 
         <DashboardTab
-          to="/dashboard/language"
-          label="Language"
+          to="/signin"
+          label="Logout"
         />
 
       </div>
@@ -90,65 +90,40 @@ function DashboardSubscriptionPage() {
             font-[300]
           "
           >
-            You have a free Stillwave account.
-            Upgrade to Stillwave Premium to unlock guided sleep,
+            You have a free StillMind account.
+            Upgrade to StillMind Premium to unlock guided sleep,
             mindfulness journeys, calming music, focus sessions
             and our complete wellness library.
           </p>
 
           {/* BUTTON */}
           <button
-            className="
-            mt-10
-            h-[52px]
-            px-10
-            rounded-full
-            bg-white/20
-            backdrop-blur-xl
-            text-white
-            text-[17px]
-            font-[400]
-            hover:bg-white/30
-            transition-all
-          "
-          >
-            Get Stillwave Premium
-          </button>
+  onClick={() => {
+    window.location.href = "/pricing";
+  }}
+  className="
+    mt-10
+    h-[52px]
+    px-10
+    rounded-full
+    bg-white/20
+    backdrop-blur-xl
+    text-white
+    text-[17px]
+    font-[400]
+    hover:bg-white/30
+    transition-all
+  "
+>
+  Get StillMind Premium
+</button>
 
         </div>
 
       </div>
 
       {/* FOOTER OUTSIDE CARD */}
-      <div
-        className="
-        mt-10
-        flex
-        items-center
-        justify-center
-        gap-5
-        text-white/80
-        text-[15px]
-      "
-      >
-
-        <button className="hover:text-white transition-colors">
-          FAQ
-        </button>
-
-        <span>|</span>
-
-        <button className="hover:text-white transition-colors">
-          Support
-        </button>
-
-        <span>|</span>
-
-        <button className="hover:text-white transition-colors">
-          Terms
-        </button>
-
-      </div>
+     
 
     </div>
   );

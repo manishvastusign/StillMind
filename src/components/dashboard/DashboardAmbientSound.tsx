@@ -2,31 +2,52 @@ import { useEffect, useRef } from "react";
 
 export function DashboardAmbientSound() {
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
 
-    const audio = new Audio("/sounds/mountain.mp3");
+    const audio = audioRef.current;
 
-    audio.loop = true;
+    if (!audio) return;
 
-    // VERY LIGHT VOLUME
-    audio.volume = 0.08;
+    audio.volume = 0.15;
 
-    audioRef.current = audio;
+    const playAudio = async () => {
 
-    audio.play().catch((error) => {
-      console.log(error);
-    });
+      try {
 
-    return () => {
+        await audio.play();
 
-      audio.pause();
+        // UNMUTE AFTER PLAY
+        setTimeout(() => {
 
-      audio.currentTime = 0;
+          audio.muted = false;
+
+        }, 300);
+
+      } catch (err) {
+
+        console.log("Autoplay blocked");
+
+      }
     };
+
+    playAudio();
 
   }, []);
 
-  return null;
+  return (
+    <audio
+      ref={audioRef}
+      autoPlay
+      muted
+      loop
+      preload="auto"
+    >
+      <source
+        src="/Nature.mp3"
+        type="audio/mpeg"
+      />
+    </audio>
+  );
 }

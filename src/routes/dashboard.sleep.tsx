@@ -18,7 +18,7 @@ function DashboardSleepPage() {
       image:
         "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
       duration: "32 min",
-      audio: "/sounds/Nature.mp3",
+      audio: "/sounds/Sleep1.mp3",
     },
 
     {
@@ -27,7 +27,7 @@ function DashboardSleepPage() {
       image:
         "https://images.unsplash.com/photo-1522383225653-ed111181a951",
       duration: "28 min",
-      audio: "/sounds/Chirping.mp3",
+      audio: "/sounds/Sleep2.mp3",
     },
 
     {
@@ -36,7 +36,7 @@ function DashboardSleepPage() {
       image:
         "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
       duration: "35 min",
-      audio: "/sounds/River.mp3",
+      audio: "/sounds/Sleep1.mp3",
     },
 
     {
@@ -45,25 +45,25 @@ function DashboardSleepPage() {
       image:
         "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
       duration: "40 min",
-      audio: "/sounds/Morning.mp3",
+      audio: "/sounds/Sleep2.mp3",
     },
 
     {
       title: "Moonlight Forest",
-      subtitle: "Deep Sleep • Stillwave",
+      subtitle: "Deep Sleep • StillMind",
       image:
         "https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
       duration: "30 min",
-      audio: "/sounds/Nature.mp3",
+      audio: "/sounds/Sleep1.mp3",
     },
 
     {
       title: "Quiet Rainfall",
-      subtitle: "Rain Therapy • Stillwave",
+      subtitle: "Rain Therapy • StillMind",
       image:
         "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
       duration: "26 min",
-      audio: "/sounds/River.mp3",
+      audio: "/sounds/Sleep2.mp3",
     },
   ];
 

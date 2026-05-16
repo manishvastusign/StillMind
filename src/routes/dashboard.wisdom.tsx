@@ -27,7 +27,7 @@ function DashboardWisdomPage() {
       image:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
       duration: "20 min",
-      audio: "/sounds/Chirping.mp3",
+      audio: "/sounds/Sleep1.mp3",
     },
 
     {
@@ -36,7 +36,7 @@ function DashboardWisdomPage() {
       image:
         "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
       duration: "18 min",
-      audio: "/sounds/River.mp3",
+      audio: "/sounds/Sleep2.mp3",
     },
 
     {
@@ -59,7 +59,7 @@ function DashboardWisdomPage() {
 
     {
       title: "Daily Mindset Reset",
-      subtitle: "Wisdom • Stillwave",
+      subtitle: "Wisdom • StillMind",
       image:
         "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
       duration: "13 min",

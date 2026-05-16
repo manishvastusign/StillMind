@@ -201,25 +201,7 @@ export function DashboardSettingsMenu({
           Logged in as: {userEmail}
         </p>
 
-        <div className="mt-6 flex items-center justify-center gap-6 text-white/80 text-lg">
-
-          <button className="hover:text-white transition-colors">
-            FAQ
-          </button>
-
-          <span>|</span>
-
-          <button className="hover:text-white transition-colors">
-            Support
-          </button>
-
-          <span>|</span>
-
-          <button className="hover:text-white transition-colors">
-            Terms
-          </button>
-
-        </div>
+        
       </div>
     </div>
   );

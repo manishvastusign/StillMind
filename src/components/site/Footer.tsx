@@ -5,9 +5,11 @@ export function Footer() {
     <footer className="bg-[var(--background-alt)] border-t border-[var(--divider)]">
       <div className="container-wellness py-20 grid gap-12 md:grid-cols-4">
         <div className="space-y-4">
-          <div className="text-2xl font-bold" style={{ background: "var(--gradient-primary)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-            Stillwave
-          </div>
+         <img
+  src="/stillmind-logo.png"
+  alt="StillMind"
+  className="h-16 w-auto object-contain"
+/>
           <p className="text-[15px] text-[#5B5B5B] leading-relaxed max-w-xs">
             A gentle space for sleep, calm, and emotional wellbeing.
           </p>
@@ -28,7 +30,7 @@ export function Footer() {
         ))}
       </div>
       <div className="border-t border-[var(--divider)] py-8 text-center text-sm text-[#6B7280]">
-        © {new Date().getFullYear()} Stillwave. Breathe gently.
+        © {new Date().getFullYear()} StillMind. Breathe gently.
       </div>
     </footer>
   );

@@ -27,7 +27,7 @@ function DashboardWorkPage() {
       image:
         "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
       duration: "10 min",
-      audio: "/sounds/Chirping.mp3",
+      audio: "/sounds/Meditate1.mp3",
     },
 
     {
@@ -36,7 +36,7 @@ function DashboardWorkPage() {
       image:
         "https://images.unsplash.com/photo-1506126613408-eca07ce68773",
       duration: "2 min",
-      audio: "/sounds/River.mp3",
+      audio: "/sounds/Meditate2.mp3",
     },
 
     {
@@ -59,7 +59,7 @@ function DashboardWorkPage() {
 
     {
       title: "Reframing Negative Thoughts",
-      subtitle: "Meditation • Stillwave",
+      subtitle: "Meditation • StillMind",
       image:
         "https://images.unsplash.com/photo-1517841905240-472988babdf9",
       duration: "9 min",

@@ -86,10 +86,10 @@ function DashboardLanguagePage() {
         </Link>
 
         <Link
-          to="/dashboard/language"
+          to="/signin"
           className="px-6 h-[42px] rounded-full bg-white text-[#123B72] flex items-center text-[18px]"
         >
-          Language
+          Logout
         </Link>
 
       </div>
@@ -102,7 +102,7 @@ function DashboardLanguagePage() {
         </h1>
 
         <p className="text-white/70 text-[22px] mt-4">
-          Select your preferred Stillwave language
+          Select your preferred StillMind language
         </p>
 
         {/* LANGUAGE LIST */}

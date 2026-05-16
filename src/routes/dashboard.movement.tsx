@@ -18,16 +18,16 @@ function DashboardMovementPage() {
       image:
         "https://images.unsplash.com/photo-1518611012118-696072aa579a",
       duration: "10 min",
-      audio: "/sounds/Nature.mp3",
+      audio: "/sounds/Music1.mp3",
     },
 
     {
       title: "Mindful Walking",
-      subtitle: "Walking Practice • Stillwave",
+      subtitle: "Walking Practice • StillMind",
       image:
         "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
       duration: "12 min",
-      audio: "/sounds/Chirping.mp3",
+      audio: "/sounds/Music2.mp3",
     },
 
     {
@@ -36,16 +36,16 @@ function DashboardMovementPage() {
       image:
         "https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
       duration: "15 min",
-      audio: "/sounds/River.mp3",
+      audio: "/sounds/Meditate1.mp3",
     },
 
     {
       title: "Standing Reset",
-      subtitle: "Focus Movement • Stillwave",
+      subtitle: "Focus Movement • StillMind",
       image:
         "https://images.unsplash.com/photo-1518310383802-640c2de311b2",
       duration: "8 min",
-      audio: "/sounds/Morning.mp3",
+      audio: "/sounds/Meditate2.mp3",
     },
 
     {
@@ -59,7 +59,7 @@ function DashboardMovementPage() {
 
     {
       title: "Movement for Calm",
-      subtitle: "Movement • Stillwave",
+      subtitle: "Movement • StillMind",
       image:
         "https://images.unsplash.com/photo-1490645935967-10de6ba17061",
       duration: "11 min",

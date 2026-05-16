@@ -18,7 +18,7 @@ function DashboardMusicPage() {
       image:
         "https://images.unsplash.com/photo-1511379938547-c1f69419868d",
       duration: "18 min",
-      audio: "/sounds/Nature.mp3",
+      audio: "/sounds/Music1.mp3",
     },
 
     {
@@ -27,7 +27,7 @@ function DashboardMusicPage() {
       image:
         "https://images.unsplash.com/photo-1516280440614-37939bbacd81",
       duration: "24 min",
-      audio: "/sounds/Chirping.mp3",
+      audio: "/sounds/Music2.mp3",
     },
 
     {
@@ -36,7 +36,7 @@ function DashboardMusicPage() {
       image:
         "https://images.unsplash.com/photo-1507838153414-b4b713384a76",
       duration: "32 min",
-      audio: "/sounds/River.mp3",
+      audio: "/sounds/Music1.mp3",
     },
 
     {
@@ -45,16 +45,16 @@ function DashboardMusicPage() {
       image:
         "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
       duration: "28 min",
-      audio: "/sounds/Morning.mp3",
+      audio: "/sounds/Music2.mp3",
     },
 
     {
       title: "Deep Ambient Focus",
-      subtitle: "Stillwave Sounds",
+      subtitle: "StillMind Sounds",
       image:
         "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
       duration: "20 min",
-      audio: "/sounds/Nature.mp3",
+      audio: "/sounds/Music1.mp3",
     },
 
     {
@@ -63,7 +63,7 @@ function DashboardMusicPage() {
       image:
         "https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
       duration: "26 min",
-      audio: "/sounds/River.mp3",
+      audio: "/sounds/Music2.mp3",
     },
   ];
 

@@ -8,10 +8,11 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
+import toast from "react-hot-toast";
 
 export const Route = createFileRoute("/signup")({
   head: () => ({
-    meta: [{ title: "Create Account — Stillwave" }],
+    meta: [{ title: "Create Account — StillMind" }],
   }),
   component: SignUp,
 });
@@ -27,7 +28,11 @@ function SignUp() {
   const [password, setPassword] = useState("");
 
   const [confirmPassword, setConfirmPassword] = useState("");
+const emailRegex =
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const passwordRegex =
+  /^(?=.*[A-Z])(?=.*\d)(?=.*[@#$])[A-Za-z\d@#$]{8,}$/;
   const handleSignUp = async () => {
 
     if (
@@ -37,21 +42,35 @@ function SignUp() {
       !confirmPassword
     ) {
 
-      alert("Please fill all fields");
+      toast.error("Please fill all fields");
       return;
     }
+// EMAIL VALIDATION
+if (!emailRegex.test(email)) {
 
+  toast.error(
+    "Please enter a valid email address"
+  );
+
+  return;
+}
+
+// PASSWORD VALIDATION
+if (!passwordRegex.test(password)) {
+
+  toast.error(
+    "Password must be minimum 8 characters and include 1 uppercase letter, 1 number and 1 special character (@ # $)"
+  );
+
+  return;
+}
     if (password !== confirmPassword) {
 
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
-    if (password.length < 6) {
-
-      alert("Password should be at least 6 characters");
-      return;
-    }
+  
 
     try {
 
@@ -71,14 +90,14 @@ function SignUp() {
         }
       );
 
-      alert("Account created successfully");
+      toast.success("Account created successfully");
 
       window.location.href =
-        "/dashboard/home";
+        "/";
 
     } catch (error: any) {
 
-      alert(error.message);
+      toast.error(error.message);
 
     } finally {
 
@@ -96,13 +115,13 @@ function SignUp() {
       );
 
       window.location.href =
-        "/dashboard/home";
+        "/";
 
     } catch (error) {
 
       console.error(error);
 
-      alert("Google sign up failed");
+     toast.error(error.message);
     }
   };
 
@@ -138,26 +157,11 @@ function SignUp() {
             className="inline-block group"
           >
 
-            <h1
-              className="
-                text-[58px]
-                leading-none
-                font-[300]
-                tracking-[-0.08em]
-                italic
-                text-white
-                opacity-95
-                transition-all
-                duration-300
-                group-hover:opacity-100
-              "
-              style={{
-                fontFamily:
-                  '"Cormorant Garamond", serif',
-              }}
-            >
-              Stillwave
-            </h1>
+            <img
+  src="/stillmind-logo.png"
+  alt="StillMind"
+  className="h-16 w-auto object-contain"
+/>
 
           </Link>
 
@@ -201,7 +205,7 @@ function SignUp() {
               leading-relaxed
             "
           >
-            Begin your wellness journey with Stillwave.
+            Begin your wellness journey with StillMind.
           </p>
 
           {/* FORM */}

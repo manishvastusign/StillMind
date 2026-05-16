@@ -1,191 +1,446 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+
+import {
+  Moon,
+  Waves,
+  Circle,
+  Sparkles,
+} from "lucide-react";
 
 export const Route = createFileRoute("/onboarding")({
-  head: () => ({ meta: [{ title: "Begin your journey — Stillwave" }] }),
-  component: Onboarding,
+  component: OnboardingPage,
 });
 
-const steps = [
-  { q: "What brings you here today?", sub: "There's no wrong answer. We'll shape your journey around it.",
-    options: ["I want to sleep better", "I'm feeling stressed or anxious", "I want to build a mindfulness habit", "I'm just curious"] },
-  { q: "How would you describe your sleep?", sub: "Be gentle and honest with yourself.",
-    options: ["I sleep deeply most nights", "I take a while to fall asleep", "I wake up often", "I rarely feel rested"] },
-  { q: "How stressed do you feel during the week?", sub: "We'll match the right tools to where you are now.",
-    options: ["Pretty steady", "Some hard moments", "Often overwhelmed", "I'm running on empty"] },
-  { q: "How would you like to feel every day?", sub: "Pick the one that calls to you most.",
-    options: ["Calmer and quieter", "More present", "Lighter emotionally", "Rested and clear"] },
-  { q: "How often would you like to practice?", sub: "Small consistent steps work beautifully.",
-    options: ["A few minutes daily", "A few times a week", "Whenever I need it", "I'll figure it out"] },
+const interestOptions = [
+  {
+    id: "sleep",
+    label: "Improve sleep quality",
+    icon: Moon,
+    from: "#43D68C",
+    to: "#5B7CFF",
+    activeFrom: "#3DA96F",
+    activeTo: "#4D74FF",
+  },
+
+  {
+    id: "stress",
+    label: "Reduce stress or anxiety",
+    icon: Waves,
+    from: "#51D5FF",
+    to: "#6C5CFF",
+    activeFrom: "#3697D9",
+    activeTo: "#584BDE",
+  },
+
+  {
+    id: "focus",
+    label: "Improve focus",
+    icon: Circle,
+    from: "#4FA3FF",
+    to: "#8A4DFF",
+    activeFrom: "#437EF3",
+    activeTo: "#7444DA",
+  },
+
+  {
+    id: "self",
+    label: "Self-improvement",
+    icon: Sparkles,
+    from: "#8A5BFF",
+    to: "#FF5FB2",
+    activeFrom: "#7048D8",
+    activeTo: "#D44D98",
+  },
+
+  {
+    id: "other",
+    label: "Something else",
+    icon: Sparkles,
+    from: "#A855F7",
+    to: "#FF6B81",
+    activeFrom: "#7E3FD1",
+    activeTo: "#D94D66",
+  },
 ];
 
-function Onboarding() {
+const questions = [
+  {
+    title: "How often do you feel stressed?",
+    subtitle: "No pressure, there's no wrong answer 🙂",
+    options: [
+      "Occasionally",
+      "Frequently",
+      "Every Day",
+      "Never",
+    ],
+  },
+
+  {
+    title: "How do you manage your stress now?",
+    subtitle: "You've come to the right place for help!",
+    options: [
+      "I don't know how to",
+      "I try different mindfulness techniques",
+      "I distract myself",
+      "None of the above",
+    ],
+  },
+
+  {
+    title: "How would you like to feel every day?",
+    subtitle: "Tip: Imagine if you didn't feel anxious or stressed.",
+    options: [
+      "Calm and happy",
+      "In control of my life",
+      "More present",
+      "All of the above",
+    ],
+  },
+];
+
+function OnboardingPage() {
+
   const navigate = useNavigate();
+  // DEMO USER ID
+// Replace this later with real logged-in user id
+const userId = "current-user";
+
+// UNIQUE STORAGE KEY
+const onboardingKey = `stillmind-onboarding-${userId}`;
+
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<(number | null)[]>(Array(steps.length).fill(null));
-  const [done, setDone] = useState(false);
 
-  const total = steps.length;
-  const progress = done ? 100 : ((step + (answers[step] !== null ? 1 : 0)) / total) * 100;
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
 
-  const select = (i: number) => {
-    const next = [...answers]; next[step] = i; setAnswers(next);
-  };
-  const advance = () => {
-    if (step < total - 1) setStep(step + 1);
-    else setDone(true);
-  };
-  const back = () => { if (step > 0) setStep(step - 1); };
-
+  const [selectedAnswer, setSelectedAnswer] = useState("");
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (done) return;
-      if (e.key === "Enter" && answers[step] !== null) { e.preventDefault(); advance(); }
-      if (e.key === "Backspace" && (e.metaKey || e.altKey)) { e.preventDefault(); back(); }
-      const n = parseInt(e.key, 10);
-      if (!isNaN(n) && n >= 1 && n <= steps[step].options.length) select(n - 1);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [step, answers, done]);
 
-  if (done) {
-    const recs = [
-      { title: "Sleep Stories", sub: "Drift off to gentle voices and slow soundscapes.", grad: "linear-gradient(135deg, #1B2B34, #3B82F6)" },
-      { title: "Guided Breathwork", sub: "Five-minute resets for stress and anxious moments.", grad: "linear-gradient(135deg, #2F7D6A, #4F7CFF)" },
-      { title: "Daily Mindfulness", sub: "A calming pause woven into your everyday rhythm.", grad: "linear-gradient(135deg, #2F6B52, #7FA38D)" },
-    ];
-    return (
-      <div className="min-h-screen bg-[var(--background)] flex flex-col">
-        <TopBar progress={100} onBack={() => setDone(false)} />
-        <div className="flex-1 flex items-center">
-          <div className="max-w-[820px] w-full mx-auto px-6 py-16 text-center animate-step-in">
-            <div className="w-28 h-28 mx-auto rounded-full mb-8 animate-[breathe_6s_ease-in-out_infinite]" style={{ background: "var(--gradient-primary)", boxShadow: "0 30px 80px rgba(59,130,246,0.3), 0 0 0 10px rgba(127,163,141,0.08)" }} />
-            <h1 className="text-[30px] md:text-[40px] font-semibold leading-[1.18] tracking-tight" style={{ color: "#2C2C2C" }}>
-              Your gentle path is ready.
-            </h1>
-            <p className="mt-5 max-w-lg mx-auto text-[16px] md:text-[17px] leading-[1.7] text-[#5B5B5B]">
-              Based on what you shared, we've shaped a personalised wellness journey just for you.
-            </p>
+  const completed = localStorage.getItem(onboardingKey);
 
-            <div className="mt-10 grid sm:grid-cols-3 gap-4 text-left">
-              {recs.map((r, i) => (
-                <div key={r.title} className="card-hover rounded-[22px] p-6 text-white relative overflow-hidden" style={{ background: r.grad, animation: `step-in 0.6s cubic-bezier(0.22,1,0.36,1) ${0.1 + i * 0.1}s both` }}>
-                  <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0) 60%)" }} />
-                  <div className="relative">
-                    <div className="text-[15px] font-semibold mb-1.5">{r.title}</div>
-                    <p className="text-[13px] leading-[1.55] text-white/80">{r.sub}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+  if (completed === "true") {
 
-            <button onClick={() => navigate({ to: "/signup" })} className="btn-cta btn-cta-glow mt-12">Begin your journey</button>
-            <div className="mt-5">
-              <button onClick={() => navigate({ to: "/" })} className="text-[#6B7280] text-[14px] hover:text-[var(--deep-green)] transition-colors underline-offset-4 hover:underline">Maybe later</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    navigate({
+      to: "/pricing",
+    });
   }
 
-  const s = steps[step];
-  const selected = answers[step];
+}, []);
+
+  const isInterestPage = step === 0;
+
+  const currentQuestion = questions[step - 1];
+
+  const progress = useMemo(() => {
+    return ((step - 1) / questions.length) * 100;
+  }, [step]);
+
+  const toggleInterest = (id: string) => {
+
+    setSelectedInterests((prev) => {
+
+      if (prev.includes(id)) {
+        return prev.filter((item) => item !== id);
+      }
+
+      return [...prev, id];
+    });
+  };
+
+  const handleContinue = () => {
+
+    if (isInterestPage) {
+      setStep(1);
+      return;
+    }
+
+    if (step < questions.length) {
+      setSelectedAnswer("");
+      setStep((prev) => prev + 1);
+      return;
+    }
+
+    // SAVE SURVEY COMPLETION
+localStorage.setItem(onboardingKey, "true");
+
+// REDIRECT
+navigate({
+  to: "/pricing",
+});
+  };
 
   return (
-    <div className="min-h-screen bg-[var(--background)] flex flex-col">
-      <TopBar progress={progress} onBack={back} canBack={step > 0} />
-      <div className="flex-1 flex items-start md:items-center">
-        <div key={step} className="max-w-[680px] w-full mx-auto px-6 py-10 md:py-12 animate-step-in">
-          <p className="text-[12.5px] tracking-[0.18em] uppercase font-semibold text-[#7FA38D]">Question {step + 1} of {total}</p>
-          <h1 className="mt-4 text-[28px] md:text-[36px] font-semibold leading-[1.2] tracking-tight" style={{ color: "#2C2C2C" }}>
-            {s.q}
-          </h1>
-          <p className="mt-3 text-[15.5px] md:text-[16.5px] leading-[1.6] text-[#5B5B5B] max-w-lg">{s.sub}</p>
+    <div className="min-h-screen bg-[#F7F7F5]">
 
-          <div className="mt-8 md:mt-10 space-y-3" role="radiogroup" aria-label={s.q}>
-            {s.options.map((o, i) => {
-              const active = selected === i;
+      {/* HEADER */}
+      <div className="bg-white border-b border-[#ECECEC]">
+
+        <div className="h-[84px] flex items-center justify-between px-8">
+
+         <img
+  src="/stillmind-logo.png"
+  alt="StillMind"
+  className="h-16 w-auto object-contain"
+/>
+
+          <button
+            onClick={() =>
+              navigate({
+                to: "/",
+              })
+            }
+            className="text-[#A7A7A7] text-[36px] leading-none hover:opacity-70"
+          >
+            ×
+          </button>
+        </div>
+
+        {/* PROGRESS BAR */}
+        {!isInterestPage && (
+          <div className="w-full h-[4px] bg-[#ECECEC] overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-[#4D9FFF] via-[#5E6BFF] to-[#7D5CFF] transition-all duration-500"
+              style={{
+                width: `${progress}%`,
+              }}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* INTEREST PAGE */}
+      {isInterestPage && (
+
+        <div className="max-w-[760px] mx-auto pt-14 pb-16 px-6">
+
+          <div className="text-center">
+
+            <h2 className="text-[34px] font-[500] text-[#2B2B2B]">
+              What brings you to StillMind?
+            </h2>
+
+            <p className="text-[#6E6E6E] text-[16px] mt-2">
+              Select all that apply
+            </p>
+          </div>
+
+          {/* OPTIONS */}
+          <div className="mt-6 flex flex-col gap-4">
+
+            {interestOptions.map((item) => {
+
+              const active = selectedInterests.includes(item.id);
+
               return (
                 <button
-                  key={o}
-                  onClick={() => select(i)}
-                  role="radio"
-                  aria-checked={active}
-                  className="group relative w-full text-left rounded-[18px] transition-all duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] focus:outline-none hover:-translate-y-[2px]"
+                  key={item.id}
+                  onClick={() => toggleInterest(item.id)}
+                  className={`
+                    h-[74px]
+                    rounded-full
+                    border
+                    px-8
+                    flex
+                    items-center
+                    gap-5
+                    text-left
+                    transition-all
+                    duration-300
+                    ${active
+                      ? "border-transparent"
+                      : "border-[#E8E8E8] bg-white"}
+                  `}
                   style={{
-                    background: "#FFFFFF",
-                    border: active ? "1.5px solid transparent" : "1.5px solid #E8E8E2",
-                    backgroundImage: active
-                      ? "linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(120deg, #7FA38D 0%, #9CC4D9 60%, #B8A88A 100%)"
-                      : undefined,
-                    backgroundOrigin: active ? "border-box" : undefined,
-                    backgroundClip: active ? "padding-box, border-box" : undefined,
-                    boxShadow: active
-                      ? "0 18px 44px -14px rgba(127,163,141,0.45), 0 4px 12px rgba(59,130,246,0.08), 0 0 0 6px rgba(127,163,141,0.06)"
-                      : "0 1px 2px rgba(0,0,0,0.02)",
-                    transform: active ? "translateY(-2px)" : "none",
+                    background: active
+                      ? `linear-gradient(135deg, ${item.activeFrom}, ${item.activeTo})`
+                      : "white",
                   }}
                 >
-                  <div className="flex items-center justify-between rounded-[16px] px-6 py-[18px] text-[16px] md:text-[17px] font-medium" style={{ color: "#2C2C2C" }}>
-                    <span>{o}</span>
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300"
-                      style={{
-                        border: active ? "none" : "1.5px solid #D7D7D7",
-                        background: active ? "linear-gradient(135deg, #2F7D57, #3B82F6)" : "transparent",
-                      }}
-                    >
-                      {active && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
-                    </span>
+
+                  {/* ICON */}
+                  <div
+                    className="h-[42px] w-[42px] rounded-full flex items-center justify-center shrink-0"
+                    style={{
+                      background: `linear-gradient(135deg, ${item.from}, ${item.to})`,
+                    }}
+                  >
+                    <item.icon
+                      size={22}
+                      strokeWidth={2.2}
+                      className="text-white"
+                    />
                   </div>
+
+                  {/* TEXT */}
+                  <span
+                    className={`
+                      text-[18px]
+                      font-[500]
+                      transition-all
+                      duration-300
+                      ${active
+                        ? "text-white"
+                        : "text-[#111111]"}
+                    `}
+                  >
+                    {item.label}
+                  </span>
                 </button>
               );
             })}
           </div>
 
-          <div className="mt-10 md:mt-12 flex flex-col items-center gap-3.5">
+          {/* BUTTONS */}
+          <div className="mt-6">
+
             <button
-              onClick={advance}
-              disabled={selected === null}
-              className="btn-cta btn-cta-glow disabled:!bg-[#D9D9D9] disabled:!shadow-none disabled:cursor-not-allowed disabled:hover:!translate-y-0 disabled:hover:!filter-none"
-              style={selected === null ? { background: "#D9D9D9", boxShadow: "none", animation: "none" } : undefined}
+              disabled={selectedInterests.length === 0}
+              onClick={handleContinue}
+              className="
+                h-[68px]
+                rounded-full
+                w-full
+                text-[22px]
+                font-[500]
+                text-white
+                transition-all
+                duration-300
+                disabled:opacity-40
+              "
+              style={{
+                background:
+                  "linear-gradient(90deg,#3FA2FF 0%,#7B5BFF 100%)",
+              }}
             >
-              {step === total - 1 ? "Finish" : "Continue"}
+              Continue
             </button>
-            <button onClick={advance} className="text-[#6B7280] text-[13.5px] hover:text-[var(--deep-green)] transition-colors underline-offset-4 hover:underline">
+
+            <button
+              onClick={() =>
+                navigate({
+                  to: "/",
+                })
+              }
+              className="
+                h-[68px]
+                rounded-full
+                w-full
+                text-[22px]
+                font-[500]
+                bg-[#ECECEC]
+                text-[#555]
+                mt-4
+              "
+            >
               Skip for now
             </button>
           </div>
         </div>
-      </div>
+      )}
+
+      {/* QUESTION PAGES */}
+      {!isInterestPage && currentQuestion && (
+
+        <div className="max-w-[760px] mx-auto pt-10 pb-16 px-6">
+
+          <div className="text-center">
+
+            <p className="text-[16px] text-[#2B2B2B]">
+              Question {step} of 3
+            </p>
+
+            <h2 className="text-[42px] leading-[50px] font-[500] text-[#2B2B2B] mt-2">
+              {currentQuestion.title}
+            </h2>
+
+            <p className="text-[18px] text-[#555] mt-3">
+              {currentQuestion.subtitle}
+            </p>
+          </div>
+
+          {/* OPTIONS */}
+          <div className="mt-6 flex flex-col gap-4">
+
+            {currentQuestion.options.map((option) => {
+
+              const active = selectedAnswer === option;
+
+              return (
+                <button
+                  key={option}
+                  onClick={() => setSelectedAnswer(option)}
+                  className={`
+                    h-[74px]
+                    rounded-full
+                    border
+                    text-left
+                    px-8
+                    text-[20px]
+                    font-[500]
+                    transition-all
+                    duration-300
+                    ${active
+                      ? "border-[#2D6BFF] bg-white"
+                      : "border-[#D8D8D8] bg-white"}
+                  `}
+                >
+                  {option}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* BUTTONS */}
+          <div className="mt-6">
+
+            <button
+              disabled={!selectedAnswer}
+              onClick={handleContinue}
+              className="
+                h-[68px]
+                rounded-full
+                w-full
+                text-[22px]
+                font-[500]
+                text-white
+                transition-all
+                duration-300
+                disabled:opacity-40
+              "
+              style={{
+                background:
+                  "linear-gradient(90deg,#3FA2FF 0%,#7B5BFF 100%)",
+              }}
+            >
+              Continue
+            </button>
+
+            <button
+              onClick={() =>
+                navigate({
+                  to: "/",
+                })
+              }
+              className="
+                h-[68px]
+                rounded-full
+                w-full
+                text-[22px]
+                font-[500]
+                border
+                border-[#BDBDBD]
+                text-[#3B3B3B]
+                mt-4
+                bg-white
+              "
+            >
+              Skip for now
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-function TopBar({ progress, onBack, canBack = true }: { progress: number; onBack: () => void; canBack?: boolean }) {
-  return (
-    <div className="px-6 pt-7 max-w-[720px] w-full mx-auto">
-      <div className="flex items-center gap-4">
-        <button onClick={onBack} disabled={!canBack} className="w-9 h-9 rounded-full flex items-center justify-center text-[#4B4B4B] hover:bg-[#ECECEC] transition disabled:opacity-30">
-          <ArrowLeft size={18} />
-        </button>
-        <div className="flex-1 h-[8px] rounded-full bg-[#E4E4DF] overflow-hidden relative">
-          <div
-            className="h-full rounded-full transition-[width] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-            style={{
-              width: `${progress}%`,
-              background: "linear-gradient(90deg, #7FA38D 0%, #9CC4D9 60%, #B8A88A 100%)",
-              backgroundSize: "200% 100%",
-              animation: "gradient-pan 8s ease-in-out infinite",
-              boxShadow: "0 0 16px rgba(127,163,141,0.35)",
-            }}
-          />
-        </div>
-        <span className="text-[12px] font-medium text-[#9A9A94] tabular-nums w-9 text-right">{Math.round(progress)}%</span>
-      </div>
-    </div>
-  );
-}
+export default OnboardingPage;

@@ -17,9 +17,9 @@ import med from "@/assets/card-meditation.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Stillwave — Calm your mind. Sleep deeper. Live mindfully." },
+      { title: "StillMind — Calm your mind. Sleep deeper. Live mindfully." },
       { name: "description", content: "A premium wellness app for sleep, stress relief, mindfulness and emotional balance." },
-      { property: "og:title", content: "Stillwave — Modern emotional wellness" },
+      { property: "og:title", content: "StillMind — Modern emotional wellness" },
       { property: "og:description", content: "Sleep deeper. Stress less. Live mindfully." },
     ],
   }),
@@ -47,7 +47,7 @@ function Home() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[var(--sage)] mb-6">A gentler kind of wellness</p>
             <h1 className="heading-hero">Build a calmer mind, one breath at a time.</h1>
             <p className="text-paragraph mt-8 max-w-xl">
-              Stillwave helps you sleep deeper, soften anxiety, and bring more presence into ordinary days — with sessions that feel like the slow exhale your nervous system has been waiting for.
+              StillMind helps you sleep deeper, soften anxiety, and bring more presence into ordinary days — with sessions that feel like the slow exhale your nervous system has been waiting for.
             </p>
             <div className="mt-12 flex flex-wrap gap-4 items-center">
               <Link to="/onboarding" className="btn-cta">Start your free week</Link>
@@ -116,13 +116,37 @@ function Home() {
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <Testimonials items={[
-              { quote: "When I cannot fall asleep, I open Stillwave and I'm out within five minutes. It's been life-changing.", name: "Brandy", location: "Houston" },
-              { quote: "I have a very busy brain. A daily practice here is wonderfully healing for me.", name: "John", location: "Chicago" },
-              { quote: "Stillwave has changed my life in immeasurable ways. I feel more resilient and connected to myself.", name: "Allison", location: "San Jose" },
-              { quote: "Finally an app that doesn't shout at me to optimise. It just lets me be.", name: "Jasmine", location: "London" },
-            ]} />
-          </Reveal>
+  <div className="text-white">
+    <Testimonials
+      items={[
+        {
+          quote:
+            "When I cannot fall asleep, I open StillMind and I'm out within five minutes. It's been life-changing.",
+          name: "Brandy",
+          location: "Houston",
+        },
+        {
+          quote:
+            "I have a very busy brain. A daily practice here is wonderfully healing for me.",
+          name: "John",
+          location: "Chicago",
+        },
+        {
+          quote:
+            "StillMind has changed my life in immeasurable ways. I feel more resilient and connected to myself.",
+          name: "Allison",
+          location: "San Jose",
+        },
+        {
+          quote:
+            "Finally an app that doesn't shout at me to optimise. It just lets me be.",
+          name: "Jasmine",
+          location: "London",
+        },
+      ]}
+    />
+  </div>
+</Reveal>
         </div>
       </section>
 
@@ -135,11 +159,11 @@ function Home() {
             </div>
           </Reveal>
           <FAQ items={[
-            { q: "What is Stillwave?", a: "Stillwave is a modern wellness companion offering sleep stories, guided meditation, breathwork and gentle programs for stress, anxiety and emotional wellbeing." },
+            { q: "What is StillMind?", a: "StillMind is a modern wellness companion offering sleep stories, guided meditation, breathwork and gentle programs for stress, anxiety and emotional wellbeing." },
             { q: "How do I cancel?", a: "You can cancel anytime from your account settings. We'll never make it harder than a few taps." },
-            { q: "Is there a free trial?", a: "Yes — a 14-day free trial of Stillwave Premium with full access to every session." },
-            { q: "Does it really work?", a: "Studies on mindfulness consistently show reductions in stress and improvements in sleep quality. We've designed Stillwave around what the research suggests, then made it feel beautiful." },
-            { q: "Can I share my account?", a: "Premium families can share Stillwave with up to six loved ones — because calm is better together." },
+            { q: "Is there a free trial?", a: "Yes — a 14-day free trial of StillMind Premium with full access to every session." },
+            { q: "Does it really work?", a: "Studies on mindfulness consistently show reductions in stress and improvements in sleep quality. We've designed StillMind around what the research suggests, then made it feel beautiful." },
+            { q: "Can I share my account?", a: "Premium families can share StillMind with up to six loved ones — because calm is better together." },
           ]} />
         </div>
       </section>

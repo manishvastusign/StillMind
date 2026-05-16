@@ -1,7 +1,8 @@
 import { auth } from "@/lib/firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 
 const links = [
   { to: "/sleep", label: "Sleep" },
@@ -13,6 +14,7 @@ export function Navbar({ accent = "var(--deep-green)" }: { accent?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const { location } = useRouterState();
   const [user, setUser] = useState<any>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -34,98 +36,178 @@ export function Navbar({ accent = "var(--deep-green)" }: { accent?: string }) {
   }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 backdrop-blur-xl ${
-        scrolled
-          ? "shadow-[0_2px_12px_rgba(15,23,42,0.04)]"
-          : ""
-      }`}
-      style={{
-        height: scrolled ? 72 : 84,
-        background: "rgba(255,255,255,0.08)",
-        backdropFilter: "blur(14px)",
-        WebkitBackdropFilter: "blur(14px)",
-      }}
-    >
-      <div className="container-wellness h-full flex items-center justify-between gap-8">
-        <Link to="/" className="flex items-center gap-2">
-          <span
-            className="text-2xl font-bold tracking-tight"
-            style={{
-              background: "var(--gradient-primary)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
-          >
-            Stillwave
-          </span>
-        </Link>
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 backdrop-blur-xl ${
+          scrolled
+            ? "shadow-[0_2px_12px_rgba(15,23,42,0.04)]"
+            : ""
+        }`}
+        style={{
+          height: scrolled ? 72 : 84,
+          background: "rgba(255,255,255,0.08)",
+          backdropFilter: "blur(14px)",
+          WebkitBackdropFilter: "blur(14px)",
+        }}
+      >
+        <div className="container-wellness h-full flex items-center justify-between gap-8">
+          
+          {/* LEFT SECTION */}
+          <div className="flex items-center gap-4">
+            
+            {/* MOBILE HAMBURGER */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full bg-white/70 backdrop-blur-md"
+            >
+              <Menu size={22} />
+            </button>
 
-        <nav className="hidden lg:flex items-center gap-10">
-          {links.map((l) => {
-            const active = location.pathname === l.to;
+            {/* LOGO */}
+            <Link to="/" className="flex items-center gap-2">
+              <img
+                src="/stillmind-logo.png"
+                alt="StillMind"
+                className="h-16 w-auto object-contain mt-1"
+              />
+            </Link>
+          </div>
 
-            return (
-              <Link
-                key={l.to}
-                to={l.to}
-                className="relative text-[15.5px] font-medium transition-colors duration-300 hover:opacity-80"
-                style={{ color: active ? accent : "#2C2C2C" }}
-              >
-                {l.label}
+          {/* DESKTOP NAV */}
+          <nav className="hidden lg:flex items-center gap-10">
+            {links.map((l) => {
+              const active = location.pathname === l.to;
 
-                <span
-                  className="absolute -bottom-2 left-0 h-[2px] rounded-full transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-                  style={{
-                    width: active ? "100%" : "0%",
-                    background: accent,
-                    opacity: active ? 1 : 0,
-                  }}
-                />
-              </Link>
-            );
-          })}
-        </nav>
+              return (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  className="relative text-[18px] font-medium transition-colors duration-300 hover:opacity-80"
+                  style={{ color: active ? accent : "#2C2C2C" }}
+                >
+                  {l.label}
 
-        <div className="flex items-center gap-4">
-          {user ? (
-            <>
-              <Link
-                to="/dashboard"
-                className="hidden sm:inline text-[14.5px] font-semibold text-[#4B4B4B] hover:text-[var(--deep-green)] transition-colors"
-              >
-                Dashboard
-              </Link>
+                  <span
+                    className="absolute -bottom-2 left-0 h-[2px] rounded-full transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
+                    style={{
+                      width: active ? "100%" : "0%",
+                      background: accent,
+                      opacity: active ? 1 : 0,
+                    }}
+                  />
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* RIGHT SECTION */}
+          <div className="flex items-center gap-4">
+            {user ? (
+              <>
+                <Link
+                  to="/dashboard/home"
+                  className="hidden sm:inline text-[18px] font-semibold text-[#4B4B4B] hover:text-[var(--deep-green)] transition-colors"
+                >
+                  Dashboard
+                </Link>
+
+                <Link
+                  to="/onboarding"
+                  className="btn-cta btn-cta-glow"
+                  style={{ padding: "12px 26px", fontSize: 15 }}
+                >
+                  Try StillMind For Free
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/signin"
+                  className="hidden sm:inline text-[18px] font-semibold text-[#4B4B4B] hover:text-[var(--deep-green)] transition-colors"
+                >
+                  Sign in
+                </Link>
+
+                <Link
+                  to="/onboarding"
+                  className="btn-cta btn-cta-glow"
+                  style={{ padding: "12px 26px", fontSize: 15 }}
+                >
+                  Try Free
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {/* MOBILE MENU */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-[100] bg-black/40 backdrop-blur-sm lg:hidden">
+          
+          <div className="w-[82%] max-w-[320px] h-full bg-white shadow-2xl p-6 flex flex-col">
+            
+            {/* TOP */}
+            <div className="flex items-center justify-between mb-10">
+              <img
+                src="/stillmind-logo.png"
+                alt="StillMind"
+                className="h-12 w-auto"
+              />
 
               <button
-                onClick={() => signOut(auth)}
-                className="btn-cta btn-cta-glow"
-                style={{ padding: "12px 26px", fontSize: 15 }}
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-10 h-10 rounded-full bg-[#F3F4F6] flex items-center justify-center"
               >
-                Logout
+                <X size={22} />
               </button>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/signin"
-                className="hidden sm:inline text-[14.5px] font-semibold text-[#4B4B4B] hover:text-[var(--deep-green)] transition-colors"
-              >
-                Sign in
-              </Link>
+            </div>
 
+            {/* NAV LINKS */}
+            <div className="flex flex-col gap-6">
+              {links.map((l) => (
+                <Link
+                  key={l.to}
+                  to={l.to}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-[18px] font-semibold text-[#2C2C2C]"
+                >
+                  {l.label}
+                </Link>
+              ))}
+
+              {user ? (
+                <Link
+                  to="/dashboard/home"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-[18px] font-semibold text-[#2C2C2C]"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  to="/signin"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-[18px] font-semibold text-[#2C2C2C]"
+                >
+                  Sign In
+                </Link>
+              )}
+            </div>
+
+            {/* CTA */}
+            <div className="mt-auto pt-10">
               <Link
                 to="/onboarding"
-                className="btn-cta btn-cta-glow"
-                style={{ padding: "12px 26px", fontSize: 15 }}
+                onClick={() => setMobileMenuOpen(false)}
+                className="btn-cta btn-cta-glow w-full flex items-center justify-center"
               >
-                Try Free
+                Try StillMind For Free
               </Link>
-            </>
-          )}
+            </div>
+          </div>
         </div>
-      </div>
-    </header>
+      )}
+    </>
   );
 }

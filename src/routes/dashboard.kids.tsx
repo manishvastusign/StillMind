@@ -50,11 +50,11 @@ function DashboardKidsPage() {
 
     {
       title: "Dreamland Adventures",
-      subtitle: "Stillwave Kids",
+      subtitle: "StillMind Kids",
       image:
         "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
       duration: "14 min",
-      audio: "/sounds/Nature.mp3",
+      audio: "/sounds/Meditate1.mp3",
     },
 
     {
@@ -63,7 +63,7 @@ function DashboardKidsPage() {
       image:
         "https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
       duration: "17 min",
-      audio: "/sounds/River.mp3",
+      audio: "/sounds/Meditate2.mp3",
     },
   ];
 

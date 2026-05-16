@@ -18,7 +18,7 @@ function DashboardMeditatePage() {
       image:
         "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
       duration: "10 min",
-      audio: "/sounds/Chirping.mp3",
+      audio: "/sounds/Meditate1.mp3",
     },
 
     {
@@ -27,7 +27,7 @@ function DashboardMeditatePage() {
       image:
         "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
       duration: "20 min",
-      audio: "/sounds/River.mp3",
+      audio: "/sounds/Meditate2.mp3",
     },
 
     {
@@ -36,7 +36,7 @@ function DashboardMeditatePage() {
       image:
         "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
       duration: "18 min",
-      audio: "/sounds/Nature.mp3",
+      audio: "/sounds/Meditate1.mp3",
     },
 
     {
@@ -45,7 +45,7 @@ function DashboardMeditatePage() {
       image:
         "https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
       duration: "15 min",
-      audio: "/sounds/Morning.mp3",
+      audio: "/sounds/Meditate2.mp3",
     },
 
     {
@@ -54,7 +54,7 @@ function DashboardMeditatePage() {
       image:
         "https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
       duration: "25 min",
-      audio: "/sounds/Chirping.mp3",
+      audio: "/sounds/Meditate1.mp3",
     },
 
     {
@@ -63,7 +63,7 @@ function DashboardMeditatePage() {
       image:
         "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
       duration: "30 min",
-      audio: "/sounds/Nature.mp3",
+      audio: "/sounds/Meditate2.mp3",
     },
   ];
 
